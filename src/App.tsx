@@ -274,12 +274,10 @@ export function App() {
       {/* Footer */}
       <footer className="border-t border-slate-900 bg-slate-950/80 mt-12 py-8 text-xs text-slate-500 mb-16 md:mb-0">
         <div className="max-w-7xl mx-auto px-4 flex flex-col md:flex-row items-center justify-between gap-4">
-          <div className="flex items-center gap-2">
-            <div className="w-6 h-6 rounded-lg bg-red-600 flex items-center justify-center text-white font-black text-xs font-mono">
-              🏁
-            </div>
+          <div className="flex items-center gap-2.5">
+            <img src="/gp1-logo-dark.png" alt="GP1" className="h-5 w-auto object-contain" />
             <span className="font-bold text-slate-300 font-mono tracking-wider">
-              PADDOCK HUB 2026
+              GP1 PADDOCK HUB 2026
             </span>
             <span>— Portal Kejuaraan Dunia Resmi FIA Formula 1 & FIM MotoGP 2026</span>
           </div>

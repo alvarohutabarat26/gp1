@@ -1,5 +1,5 @@
 import React from 'react';
-import { Flag, Trophy, Calendar, Users, Newspaper, Star, Globe, Search, RefreshCw, CheckCircle2 } from 'lucide-react';
+import { Trophy, Calendar, Users, Newspaper, Star, Globe, Search, RefreshCw, CheckCircle2 } from 'lucide-react';
 import { SeriesType } from '../types/motorsport';
 
 interface NavbarProps {
@@ -87,18 +87,18 @@ export const Navbar: React.FC<NavbarProps> = ({
             <div className="flex items-center justify-between w-full md:w-auto gap-2 sm:gap-4">
               <div 
                 onClick={() => setActiveTab('overview')} 
-                className="flex items-center gap-2 sm:gap-2.5 cursor-pointer group select-none shrink-0"
+                className="flex items-center gap-2 sm:gap-3 cursor-pointer group select-none shrink-0"
               >
-                <div className="w-8 h-8 sm:w-10 sm:h-10 rounded-xl bg-gradient-to-br from-red-600 via-orange-500 to-amber-500 p-0.5 shadow-lg shadow-red-500/20 group-hover:scale-105 transition-transform">
-                  <div className="w-full h-full bg-slate-950 rounded-[10px] flex items-center justify-center">
-                    <Flag className="w-4 h-4 sm:w-5 sm:h-5 text-red-500 group-hover:rotate-12 transition-transform" />
-                  </div>
-                </div>
-                <div>
-                  <span className="text-lg sm:text-xl font-black tracking-wider uppercase bg-gradient-to-r from-red-500 via-orange-400 to-amber-300 bg-clip-text text-transparent font-mono">
-                    PADDOCK<span className="text-white">HUB</span>
+                <img
+                  src="/gp1-logo-dark.png"
+                  alt="GP1"
+                  className="h-7 sm:h-9 w-auto object-contain transition-transform group-hover:scale-105 drop-shadow-[0_2px_12px_rgba(238,28,37,0.4)]"
+                />
+                <div className="border-l border-slate-800 pl-2 hidden xs:block">
+                  <span className="block text-[11px] sm:text-xs font-black tracking-widest text-slate-200 uppercase font-mono leading-none">
+                    PADDOCK HUB
                   </span>
-                  <span className="block text-[9px] sm:text-[10px] font-bold tracking-widest text-emerald-400 uppercase">
+                  <span className="block text-[8px] sm:text-[9px] font-bold tracking-widest text-emerald-400 uppercase leading-none mt-1">
                     OFFICIAL 2026
                   </span>
                 </div>
