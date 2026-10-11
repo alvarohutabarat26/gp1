@@ -276,21 +276,21 @@ export function App() {
         <div className="max-w-7xl mx-auto px-4 flex flex-col md:flex-row items-center justify-between gap-4">
           <div className="flex items-center gap-2.5">
             <img src="/gp1-logo-dark.png" alt="GP1" className="h-5 w-auto object-contain" />
-            <span className="font-racing font-bold text-white tracking-wider text-sm">
-              GP1 PADDOCK HUB 2026
+            <span className="font-bold text-white tracking-wide text-sm">
+              GP1 Paddock Hub 2026
             </span>
             <span className="hidden sm:inline text-slate-600">|</span>
-            <span className="hidden sm:inline text-slate-400">Portal Kejuaraan Dunia Resmi FIA Formula 1 & FIM MotoGP 2026</span>
+            <span className="hidden sm:inline text-slate-400">Portal Kejuaraan Dunia Formula 1 & MotoGP 2026</span>
           </div>
 
           <div className="flex items-center gap-3 text-slate-400 text-[11px]">
-            <span className="flex items-center gap-1.5 text-emerald-400 font-bold bg-emerald-950/40 px-2 py-0.5 rounded border border-emerald-500/20">
+            <span className="flex items-center gap-1.5 text-emerald-400 font-semibold bg-emerald-950/40 px-2 py-0.5 rounded border border-emerald-500/20">
               <CheckCircle2 className="w-3 h-3" />
-              OFFICIAL 2026 LIVE SCRAPED
+              Live Data 2026
             </span>
             <span className="flex items-center gap-1 bg-[#12151d] px-2 py-0.5 rounded border border-[#232838]">
               <ShieldCheck className="w-3 h-3 text-slate-400" />
-              WAKTU {timezone}
+              Waktu {timezone}
             </span>
           </div>
         </div>

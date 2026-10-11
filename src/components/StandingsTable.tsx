@@ -52,66 +52,66 @@ export const StandingsTable: React.FC<StandingsTableProps> = ({
   return (
     <div className="space-y-5 font-tech">
       {/* Official Classification Header Controls */}
-      <div className="paddock-panel p-4 rounded flex flex-col md:flex-row items-start md:items-center justify-between gap-4 border border-[#232838]">
+      <div className="paddock-panel p-4 rounded-xl flex flex-col md:flex-row items-start md:items-center justify-between gap-4 border border-[#232838]">
         <div>
           <div className="flex items-center gap-2">
-            <span className={`px-2 py-0.5 text-[10px] font-mono font-black uppercase text-white rounded ${isF1 ? 'bg-[#e10600]' : 'bg-[#0070c0]'}`}>
-              {isF1 ? 'FIA FORMULA 1' : 'FIM MOTOGP'}
+            <span className={`px-2 py-0.5 text-[10px] font-mono font-bold uppercase text-white rounded-md ${isF1 ? 'bg-[#e10600]' : 'bg-[#0070c0]'}`}>
+              {isF1 ? 'FIA Formula 1' : 'FIM MotoGP'}
             </span>
-            <span className="text-xs font-mono text-slate-400">OFFICIAL WORLD CHAMPIONSHIP {season}</span>
+            <span className="text-xs text-slate-400 font-medium">Musim Resmi {season}</span>
           </div>
-          <h2 className="text-2xl sm:text-3xl font-racing font-black text-white uppercase tracking-tight mt-1">
-            KLASEMEN KEJUARAAN DUNIA RESMI
+          <h2 className="text-xl sm:text-2xl font-bold text-white tracking-tight mt-1">
+            Klasemen Kejuaraan Dunia Resmi
           </h2>
         </div>
 
         <div className="flex flex-wrap items-center gap-2.5">
           {selectedSeries === 'all' && (
-            <div className="flex items-center bg-[#0a0c10] p-0.5 rounded border border-[#232838] font-racing text-xs font-bold">
+            <div className="flex items-center bg-[#0a0c10] p-0.5 rounded-lg border border-[#232838] text-xs font-semibold">
               <button
                 onClick={() => setActiveSeries('f1')}
-                className={`px-3 py-1 rounded transition-all uppercase ${
+                className={`px-3 py-1 rounded-md transition-all ${
                   activeSeries === 'f1'
                     ? 'bg-[#e10600] text-white shadow-xs'
                     : 'text-slate-400 hover:text-white'
                 }`}
               >
-                FORMULA 1
+                Formula 1
               </button>
               <button
                 onClick={() => setActiveSeries('motogp')}
-                className={`px-3 py-1 rounded transition-all uppercase ${
+                className={`px-3 py-1 rounded-md transition-all ${
                   activeSeries === 'motogp'
                     ? 'bg-[#0070c0] text-white shadow-xs'
                     : 'text-slate-400 hover:text-white'
                 }`}
               >
-                MOTOGP
+                MotoGP
               </button>
             </div>
           )}
 
           {/* Standings Category Toggle */}
-          <div className="flex items-center bg-[#0a0c10] p-0.5 rounded border border-[#232838] font-racing text-xs font-bold">
+          <div className="flex items-center bg-[#0a0c10] p-0.5 rounded-lg border border-[#232838] text-xs font-semibold">
             <button
               onClick={() => setStandingsType('drivers')}
-              className={`px-3 py-1 rounded transition-all uppercase ${
+              className={`px-3 py-1 rounded-md transition-all ${
                 standingsType === 'drivers'
-                  ? 'bg-[#232838] text-white shadow-xs'
+                  ? 'bg-[#232838] text-white shadow-xs font-bold'
                   : 'text-slate-400 hover:text-white'
               }`}
             >
-              PEMBALAP ({currentDrivers.length})
+              Pembalap ({currentDrivers.length})
             </button>
             <button
               onClick={() => setStandingsType('constructors')}
-              className={`px-3 py-1 rounded transition-all uppercase ${
+              className={`px-3 py-1 rounded-md transition-all ${
                 standingsType === 'constructors'
-                  ? 'bg-[#232838] text-white shadow-xs'
+                  ? 'bg-[#232838] text-white shadow-xs font-bold'
                   : 'text-slate-400 hover:text-white'
               }`}
             >
-              KONSTRUKTOR ({currentTeams.length})
+              Konstruktor ({currentTeams.length})
             </button>
           </div>
         </div>
@@ -119,21 +119,21 @@ export const StandingsTable: React.FC<StandingsTableProps> = ({
 
       {/* DRIVERS STANDINGS TABLE */}
       {standingsType === 'drivers' && (
-        <div className="paddock-panel rounded overflow-hidden border border-[#232838]">
+        <div className="paddock-panel rounded-xl overflow-hidden border border-[#232838]">
           <div className="overflow-x-auto">
             <table className="w-full text-left text-sm">
-              <thead className="bg-[#0a0c10] font-racing text-xs uppercase tracking-wider text-slate-400 border-b border-[#232838]">
+              <thead className="bg-[#0a0c10] text-xs uppercase tracking-wider text-slate-400 border-b border-[#232838] font-semibold">
                 <tr>
-                  <th className="py-2.5 px-3 w-14 text-center">POS</th>
-                  <th className="py-2.5 px-3">PEMBALAP</th>
-                  <th className="py-2.5 px-3 hidden sm:table-cell">TIM & KONSTRUKTOR</th>
-                  <th className="py-2.5 px-3 text-center hidden md:table-cell">GAP</th>
-                  <th className="py-2.5 px-3 text-center hidden sm:table-cell">MENANG</th>
-                  <th className="py-2.5 px-3 text-center hidden lg:table-cell">PODIUM</th>
+                  <th className="py-2.5 px-3 w-14 text-center">Pos</th>
+                  <th className="py-2.5 px-3">Pembalap</th>
+                  <th className="py-2.5 px-3 hidden sm:table-cell">Tim & Konstruktor</th>
+                  <th className="py-2.5 px-3 text-center hidden md:table-cell">Selisih</th>
+                  <th className="py-2.5 px-3 text-center hidden sm:table-cell">Menang</th>
+                  <th className="py-2.5 px-3 text-center hidden lg:table-cell">Podium</th>
                   {activeSeries === 'motogp' && (
-                    <th className="py-2.5 px-3 text-center hidden xl:table-cell">FORM TERAKHIR</th>
+                    <th className="py-2.5 px-3 text-center hidden xl:table-cell">Form Terakhir</th>
                   )}
-                  <th className="py-2.5 px-4 text-right">POIN</th>
+                  <th className="py-2.5 px-4 text-right">Poin</th>
                 </tr>
               </thead>
               <tbody className="divide-y divide-[#191d29] font-medium">
@@ -266,17 +266,17 @@ export const StandingsTable: React.FC<StandingsTableProps> = ({
 
       {/* CONSTRUCTORS STANDINGS TABLE */}
       {standingsType === 'constructors' && (
-        <div className="paddock-panel rounded overflow-hidden border border-[#232838]">
+        <div className="paddock-panel rounded-xl overflow-hidden border border-[#232838]">
           <div className="overflow-x-auto">
             <table className="w-full text-left text-sm">
-              <thead className="bg-[#0a0c10] font-racing text-xs uppercase tracking-wider text-slate-400 border-b border-[#232838]">
+              <thead className="bg-[#0a0c10] text-xs uppercase tracking-wider text-slate-400 border-b border-[#232838] font-semibold">
                 <tr>
-                  <th className="py-2.5 px-3 w-14 text-center">POS</th>
-                  <th className="py-2.5 px-3">KONSTRUKTOR / TIM BALAP</th>
-                  <th className="py-2.5 px-3 hidden sm:table-cell">POWER UNIT / MOTOR</th>
-                  <th className="py-2.5 px-3 text-center hidden md:table-cell">GAP</th>
-                  <th className="py-2.5 px-4 w-44 hidden lg:table-cell">BAROMETR POIN</th>
-                  <th className="py-2.5 px-4 text-right">POIN TOTAL</th>
+                  <th className="py-2.5 px-3 w-14 text-center">Pos</th>
+                  <th className="py-2.5 px-3">Konstruktor / Tim Balap</th>
+                  <th className="py-2.5 px-3 hidden sm:table-cell">Power Unit / Mesin</th>
+                  <th className="py-2.5 px-3 text-center hidden md:table-cell">Selisih</th>
+                  <th className="py-2.5 px-4 w-44 hidden lg:table-cell">Barometer Poin</th>
+                  <th className="py-2.5 px-4 text-right">Total Poin</th>
                 </tr>
               </thead>
               <tbody className="divide-y divide-[#191d29] font-medium">

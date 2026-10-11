@@ -109,21 +109,21 @@ export const Navbar: React.FC<NavbarProps> = ({
                 </div>
               </div>
 
-              {/* TV Broadcast Style Series Switcher */}
-              <div className="flex items-center bg-[#0d0f14] p-0.5 rounded border border-[#202533] shrink-0 font-racing font-bold text-xs">
+              {/* Series Switcher */}
+              <div className="flex items-center bg-[#0d0f14] p-0.5 rounded-lg border border-[#202533] shrink-0 text-xs font-semibold">
                 <button
                   onClick={() => setSelectedSeries('all')}
-                  className={`px-3 py-1 rounded transition-all tracking-wider uppercase ${
+                  className={`px-3 py-1 rounded-md transition-all ${
                     selectedSeries === 'all'
                       ? 'bg-[#222735] text-white shadow-xs'
                       : 'text-slate-400 hover:text-slate-200'
                   }`}
                 >
-                  SEMUA
+                  Semua
                 </button>
                 <button
                   onClick={() => setSelectedSeries('f1')}
-                  className={`flex items-center gap-1.5 px-3 py-1 rounded transition-all tracking-wider uppercase ${
+                  className={`flex items-center gap-1.5 px-3 py-1 rounded-md transition-all ${
                     selectedSeries === 'f1'
                       ? 'bg-[#e10600] text-white shadow-md shadow-red-900/40'
                       : 'text-slate-400 hover:text-red-400'
@@ -134,14 +134,14 @@ export const Navbar: React.FC<NavbarProps> = ({
                 </button>
                 <button
                   onClick={() => setSelectedSeries('motogp')}
-                  className={`flex items-center gap-1.5 px-3 py-1 rounded transition-all tracking-wider uppercase ${
+                  className={`flex items-center gap-1.5 px-3 py-1 rounded-md transition-all ${
                     selectedSeries === 'motogp'
                       ? 'bg-[#0070c0] text-white shadow-md shadow-sky-900/40'
                       : 'text-slate-400 hover:text-sky-400'
                   }`}
                 >
                   <span className="w-1.5 h-1.5 rounded-full bg-white"></span>
-                  <span>MOTOGP</span>
+                  <span>MotoGP</span>
                 </button>
               </div>
             </div>
@@ -154,7 +154,7 @@ export const Navbar: React.FC<NavbarProps> = ({
                 placeholder="Cari driver, tim balap, sirkuit..."
                 value={searchQuery}
                 onChange={(e) => setSearchQuery(e.target.value)}
-                className="w-full bg-[#0d0f14] border border-[#202533] rounded pl-8 pr-7 py-1.5 text-xs text-slate-200 placeholder-slate-500 focus:outline-none focus:border-[#e10600] font-tech transition-all"
+                className="w-full bg-[#0d0f14] border border-[#202533] rounded-lg pl-8 pr-7 py-1.5 text-xs text-slate-200 placeholder-slate-500 focus:outline-none focus:border-[#e10600] transition-all"
               />
               {searchQuery && (
                 <button
@@ -168,79 +168,79 @@ export const Navbar: React.FC<NavbarProps> = ({
           </div>
 
           {/* Desktop Racing Navigation Tabs */}
-          <nav className="flex items-center gap-1 mt-2 pt-1 border-t border-[#181c26] overflow-x-auto scrollbar-none font-racing text-sm font-bold tracking-wider uppercase">
+          <nav className="flex items-center gap-1 mt-2.5 pt-1.5 border-t border-[#181c26] overflow-x-auto scrollbar-none text-xs sm:text-sm font-semibold">
             <button
               onClick={() => setActiveTab('overview')}
-              className={`flex items-center gap-2 px-3.5 py-1.5 transition-all shrink-0 border-b-2 ${
+              className={`flex items-center gap-2 px-3.5 py-1.5 rounded-lg transition-all shrink-0 ${
                 activeTab === 'overview'
-                  ? 'border-[#e10600] text-white bg-[#141720]'
-                  : 'border-transparent text-slate-400 hover:text-white hover:bg-[#10131a]'
+                  ? 'bg-[#181c26] text-white font-bold border-b-2 border-[#e10600]'
+                  : 'text-slate-400 hover:text-white hover:bg-[#10131a]'
               }`}
             >
               <Trophy className="w-3.5 h-3.5 text-amber-400 shrink-0" />
-              OVERVIEW
+              Overview
             </button>
 
             <button
               onClick={() => setActiveTab('calendar')}
-              className={`flex items-center gap-2 px-3.5 py-1.5 transition-all shrink-0 border-b-2 ${
+              className={`flex items-center gap-2 px-3.5 py-1.5 rounded-lg transition-all shrink-0 ${
                 activeTab === 'calendar'
-                  ? 'border-[#e10600] text-white bg-[#141720]'
-                  : 'border-transparent text-slate-400 hover:text-white hover:bg-[#10131a]'
+                  ? 'bg-[#181c26] text-white font-bold border-b-2 border-[#e10600]'
+                  : 'text-slate-400 hover:text-white hover:bg-[#10131a]'
               }`}
             >
               <Calendar className="w-3.5 h-3.5 text-sky-400 shrink-0" />
-              JADWAL RACE & SESI
+              Jadwal Balap
             </button>
 
             <button
               onClick={() => setActiveTab('drivers')}
-              className={`flex items-center gap-2 px-3.5 py-1.5 transition-all shrink-0 border-b-2 ${
+              className={`flex items-center gap-2 px-3.5 py-1.5 rounded-lg transition-all shrink-0 ${
                 activeTab === 'drivers'
-                  ? 'border-[#e10600] text-white bg-[#141720]'
-                  : 'border-transparent text-slate-400 hover:text-white hover:bg-[#10131a]'
+                  ? 'bg-[#181c26] text-white font-bold border-b-2 border-[#e10600]'
+                  : 'text-slate-400 hover:text-white hover:bg-[#10131a]'
               }`}
             >
               <Users className="w-3.5 h-3.5 text-emerald-400 shrink-0" />
-              LINEUP PEMBALAP
+              Lineup 2026
             </button>
 
             <button
               onClick={() => setActiveTab('standings')}
-              className={`flex items-center gap-2 px-3.5 py-1.5 transition-all shrink-0 border-b-2 ${
+              className={`flex items-center gap-2 px-3.5 py-1.5 rounded-lg transition-all shrink-0 ${
                 activeTab === 'standings'
-                  ? 'border-[#e10600] text-white bg-[#141720]'
-                  : 'border-transparent text-slate-400 hover:text-white hover:bg-[#10131a]'
+                  ? 'bg-[#181c26] text-white font-bold border-b-2 border-[#e10600]'
+                  : 'text-slate-400 hover:text-white hover:bg-[#10131a]'
               }`}
             >
               <Trophy className="w-3.5 h-3.5 text-purple-400 shrink-0" />
-              KLASEMEN RESMI
+              Klasemen
             </button>
 
             <button
               onClick={() => setActiveTab('news')}
-              className={`flex items-center gap-2 px-3.5 py-1.5 transition-all shrink-0 border-b-2 ${
+              className={`flex items-center gap-2 px-3.5 py-1.5 rounded-lg transition-all shrink-0 ${
                 activeTab === 'news'
-                  ? 'border-[#e10600] text-white bg-[#141720]'
-                  : 'border-transparent text-slate-400 hover:text-white hover:bg-[#10131a]'
+                  ? 'bg-[#181c26] text-white font-bold border-b-2 border-[#e10600]'
+                  : 'text-slate-400 hover:text-white hover:bg-[#10131a]'
               }`}
             >
               <Newspaper className="w-3.5 h-3.5 text-rose-400 shrink-0" />
-              BERITA PADDOCK
+              Berita Paddock
             </button>
 
             <button
               onClick={() => setActiveTab('favorites')}
-              className={`flex items-center gap-2 px-3.5 py-1.5 transition-all shrink-0 ml-auto border-b-2 ${
+              className={`flex items-center gap-2 px-3.5 py-1.5 rounded-lg transition-all shrink-0 ml-auto ${
                 activeTab === 'favorites'
-                  ? 'border-amber-400 text-amber-300 bg-[#141720]'
-                  : 'border-transparent text-slate-400 hover:text-amber-300 hover:bg-[#10131a]'
+                  ? 'bg-[#181c26] text-amber-300 font-bold border-b-2 border-amber-400'
+                  : 'text-slate-400 hover:text-amber-300 hover:bg-[#10131a]'
               }`}
             >
               <Star className={`w-3.5 h-3.5 shrink-0 ${favoritesCount > 0 ? 'fill-amber-400 text-amber-400' : 'text-slate-400'}`} />
-              <span>GRID FAVORIT</span>
+              <span>Grid Favorit</span>
               {favoritesCount > 0 && (
-                <span className="bg-amber-400 text-black font-black text-[10px] px-1.5 rounded font-mono">
+                <span className="bg-amber-400 text-black font-black text-[10px] px-1.5 py-0.2 rounded-full font-mono">
                   {favoritesCount}
                 </span>
               )}

@@ -155,7 +155,7 @@ const RiderCard: React.FC<{
             >
               {driver.shortName || driver.number}
             </div>
-            <span className="text-[11px] text-slate-500 font-mono">OFFICIAL PROFILE</span>
+            <span className="text-[11px] text-slate-500 font-mono">Profil Resmi</span>
           </div>
         )}
 
@@ -214,16 +214,16 @@ const RiderCard: React.FC<{
           {/* Telemetry Stats Strip (Poin, Posisi, Menang) */}
           <div className="grid grid-cols-3 gap-1.5 mt-2.5 text-center font-mono">
             <div className="bg-[#12151d] p-1.5 rounded border border-[#1e2330]">
-              <span className="text-[9px] text-slate-500 font-bold uppercase block">POIN</span>
-              <span className="text-sm font-racing font-black text-amber-400">{driver.points}</span>
+              <span className="text-[10px] text-slate-500 font-semibold block">Poin</span>
+              <span className="text-sm font-racing font-bold text-amber-400">{driver.points}</span>
             </div>
             <div className="bg-[#12151d] p-1.5 rounded border border-[#1e2330]">
-              <span className="text-[9px] text-slate-500 font-bold uppercase block">POSISI</span>
-              <span className="text-sm font-racing font-black text-white">P{driver.position}</span>
+              <span className="text-[10px] text-slate-500 font-semibold block">Posisi</span>
+              <span className="text-sm font-racing font-bold text-white">P{driver.position}</span>
             </div>
             <div className="bg-[#12151d] p-1.5 rounded border border-[#1e2330]">
-              <span className="text-[9px] text-slate-500 font-bold uppercase block">MENANG</span>
-              <span className="text-sm font-racing font-black text-white">{driver.wins}</span>
+              <span className="text-[10px] text-slate-500 font-semibold block">Menang</span>
+              <span className="text-sm font-racing font-bold text-white">{driver.wins}</span>
             </div>
           </div>
         </div>
@@ -234,9 +234,9 @@ const RiderCard: React.FC<{
             e.stopPropagation();
             onSelectDriver(driver);
           }}
-          className="mt-3 w-full flex items-center justify-center gap-1.5 py-1.5 px-3 rounded bg-[#141822] text-xs font-racing font-bold tracking-wider uppercase text-slate-200 hover:bg-[#1e2332] hover:text-white transition-all border border-[#232838]"
+          className="mt-3 w-full flex items-center justify-center gap-1.5 py-1.5 px-3 rounded bg-[#141822] text-xs font-semibold text-slate-200 hover:bg-[#1e2332] hover:text-white transition-all border border-[#232838]"
         >
-          <span>PROFIL DETAIL</span>
+          <span>Lihat Profil</span>
           <ChevronRight className="w-3.5 h-3.5" />
         </button>
       </div>
@@ -298,35 +298,35 @@ export const DriverLineup: React.FC<DriverLineupProps> = ({
       <div className="paddock-panel p-4 rounded flex flex-col lg:flex-row items-start lg:items-center justify-between gap-4 border border-[#232838]">
         <div>
           <div className="flex items-center gap-2">
-            <span className="px-2 py-0.5 text-[10px] font-mono font-black uppercase text-white bg-emerald-600 rounded">
-              OFFICIAL ENTRY LIST
+            <span className="px-2 py-0.5 text-[10px] font-semibold text-white bg-emerald-600 rounded">
+              Entry List Resmi
             </span>
-            <span className="text-xs font-mono text-slate-400">MUSIM RESMI 2026</span>
+            <span className="text-xs text-slate-400">Musim 2026</span>
           </div>
-          <h2 className="text-2xl sm:text-3xl font-racing font-black text-white uppercase tracking-tight mt-1">
-            GRID LINEUP PEMBALAP & TIM RESMI
+          <h2 className="text-2xl sm:text-3xl font-bold text-white tracking-tight mt-1">
+            Grid Lineup Pembalap & Tim Resmi
           </h2>
         </div>
 
         {/* Dual Controls: Series Selector & View Toggle */}
-        <div className="flex flex-wrap items-center gap-2.5 w-full lg:w-auto font-racing font-bold text-xs">
+        <div className="flex flex-wrap items-center gap-2.5 w-full lg:w-auto font-medium text-xs">
           {/* Series Selector */}
           <div className="flex items-center bg-[#0a0c10] p-0.5 rounded border border-[#232838]">
             <button
               onClick={() => handleSeriesChange('all')}
-              className={`px-3 py-1 rounded transition-all uppercase ${
+              className={`px-3 py-1.5 rounded transition-all ${
                 activeSeries === 'all'
-                  ? 'bg-[#232838] text-white shadow-xs'
+                  ? 'bg-[#232838] text-white shadow-xs font-semibold'
                   : 'text-slate-400 hover:text-white'
               }`}
             >
-              SEMUA ({drivers.length})
+              Semua ({drivers.length})
             </button>
             <button
               onClick={() => handleSeriesChange('f1')}
-              className={`px-3 py-1 rounded transition-all uppercase ${
+              className={`px-3 py-1.5 rounded transition-all ${
                 activeSeries === 'f1'
-                  ? 'bg-[#e10600] text-white shadow-xs'
+                  ? 'bg-[#e10600] text-white shadow-xs font-semibold'
                   : 'text-slate-400 hover:text-red-400'
               }`}
             >
@@ -334,13 +334,13 @@ export const DriverLineup: React.FC<DriverLineupProps> = ({
             </button>
             <button
               onClick={() => handleSeriesChange('motogp')}
-              className={`px-3 py-1 rounded transition-all uppercase ${
+              className={`px-3 py-1.5 rounded transition-all ${
                 activeSeries === 'motogp'
-                  ? 'bg-[#0070c0] text-white shadow-xs'
+                  ? 'bg-[#0070c0] text-white shadow-xs font-semibold'
                   : 'text-slate-400 hover:text-sky-400'
               }`}
             >
-              MOTOGP ({motogpDriversCount})
+              MotoGP ({motogpDriversCount})
             </button>
           </div>
 
@@ -348,23 +348,23 @@ export const DriverLineup: React.FC<DriverLineupProps> = ({
           <div className="flex items-center bg-[#0a0c10] p-0.5 rounded border border-[#232838]">
             <button
               onClick={() => setActiveView('drivers')}
-              className={`px-3 py-1 rounded transition-all uppercase ${
+              className={`px-3 py-1.5 rounded transition-all ${
                 activeView === 'drivers'
-                  ? 'bg-[#232838] text-white shadow-xs'
+                  ? 'bg-[#232838] text-white shadow-xs font-semibold'
                   : 'text-slate-400 hover:text-white'
               }`}
             >
-              PEMBALAP ({filteredDrivers.length})
+              Pembalap ({filteredDrivers.length})
             </button>
             <button
               onClick={() => setActiveView('teams')}
-              className={`px-3 py-1 rounded transition-all uppercase ${
+              className={`px-3 py-1.5 rounded transition-all ${
                 activeView === 'teams'
-                  ? 'bg-[#232838] text-white shadow-xs'
+                  ? 'bg-[#232838] text-white shadow-xs font-semibold'
                   : 'text-slate-400 hover:text-white'
               }`}
             >
-              TIM ({filteredTeams.length})
+              Tim ({filteredTeams.length})
             </button>
           </div>
         </div>
@@ -375,7 +375,7 @@ export const DriverLineup: React.FC<DriverLineupProps> = ({
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4">
           {filteredDrivers.length === 0 ? (
             <div className="col-span-full text-center py-12 paddock-panel rounded border border-[#232838]">
-              <p className="text-slate-400 text-sm font-mono">TIDAK DITEMUKAN PEMBALAP YANG SESUAI.</p>
+              <p className="text-slate-400 text-sm">Tidak ditemukan pembalap yang sesuai.</p>
             </div>
           ) : (
             filteredDrivers.map((driver) => (
@@ -408,43 +408,43 @@ export const DriverLineup: React.FC<DriverLineupProps> = ({
 
                 <div className="flex items-center justify-between mt-1">
                   <span
-                    className={`text-[9px] font-mono font-black uppercase px-2 py-0.5 rounded ${
+                    className={`text-[9px] font-semibold px-2 py-0.5 rounded ${
                       isF1
                         ? 'bg-red-950/60 text-red-300 border border-red-500/30'
                         : 'bg-sky-950/60 text-sky-300 border border-sky-500/30'
                     }`}
                   >
-                    {isF1 ? 'F1 CONSTRUCTOR' : 'MOTOGP FACTORY'}
+                    {isF1 ? 'Konstruktor F1' : 'Pabrikan MotoGP'}
                   </span>
-                  <span className="text-sm font-racing font-black text-amber-400">
-                    POSISI #{team.position}
+                  <span className="text-sm font-bold text-amber-400">
+                    Posisi #{team.position}
                   </span>
                 </div>
 
-                <h3 className="text-2xl font-racing font-black text-white mt-2 uppercase tracking-tight">{team.name}</h3>
-                <p className="text-xs text-slate-400 mt-0.5 font-tech">{team.fullName}</p>
+                <h3 className="text-xl font-bold text-white mt-2 tracking-tight">{team.name}</h3>
+                <p className="text-xs text-slate-400 mt-0.5">{team.fullName}</p>
 
-                <div className="space-y-1.5 mt-3 text-xs font-mono">
+                <div className="space-y-1.5 mt-3 text-xs">
                   <div className="flex items-center justify-between text-slate-300 bg-[#0b0d12] p-2 rounded border border-[#1c202d]">
-                    <span className="text-slate-500">PABRIKAN:</span>
+                    <span className="text-slate-500">Pabrikan / Mesin:</span>
                     <span className="font-semibold text-white">{team.powerUnitOrBike}</span>
                   </div>
                   <div className="flex items-center justify-between text-slate-300 bg-[#0b0d12] p-2 rounded border border-[#1c202d]">
-                    <span className="text-slate-500">TOTAL POIN:</span>
-                    <span className="font-bold text-amber-400">{team.points} PTS</span>
+                    <span className="text-slate-500">Total Poin:</span>
+                    <span className="font-bold text-amber-400">{team.points} Poin</span>
                   </div>
                 </div>
 
                 {team.drivers.length > 0 && (
                   <div className="mt-3 pt-2.5 border-t border-[#1a1f2c]">
-                    <span className="text-[10px] font-mono uppercase font-bold text-slate-500 block mb-1">
-                      PEMBALAP RESMI:
+                    <span className="text-[10px] font-semibold text-slate-500 block mb-1">
+                      Pembalap Resmi:
                     </span>
                     <div className="flex flex-wrap gap-1.5">
                       {team.drivers.map((driverName, idx) => (
                         <span
                           key={idx}
-                          className="bg-[#12151d] text-slate-200 text-xs px-2 py-0.5 rounded font-racing font-bold uppercase border border-[#232838]"
+                          className="bg-[#12151d] text-slate-200 text-xs px-2 py-0.5 rounded font-medium border border-[#232838]"
                         >
                           {driverName}
                         </span>

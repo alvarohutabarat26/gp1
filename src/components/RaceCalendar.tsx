@@ -60,38 +60,38 @@ export const RaceCalendar: React.FC<RaceCalendarProps> = ({
   return (
     <div className="space-y-5 font-tech">
       {/* Top Filter and Controls Bar */}
-      <div className="paddock-panel p-4 rounded flex flex-col lg:flex-row items-start lg:items-center justify-between gap-4 border border-[#232838]">
+      <div className="paddock-panel p-4 rounded-xl flex flex-col lg:flex-row items-start lg:items-center justify-between gap-4 border border-[#232838]">
         <div>
           <div className="flex items-center gap-2">
-            <span className="px-2 py-0.5 text-[10px] font-mono font-black uppercase text-white bg-sky-600 rounded">
-              OFFICIAL 2026 CALENDAR
+            <span className="px-2 py-0.5 text-[10px] font-mono font-bold uppercase text-white bg-sky-600 rounded-md">
+              Kalender Resmi 2026
             </span>
-            <span className="text-xs font-mono text-slate-400">WAKTU {timezone}</span>
+            <span className="text-xs text-slate-400 font-medium">Waktu {timezone}</span>
           </div>
-          <h2 className="text-2xl sm:text-3xl font-racing font-black text-white uppercase tracking-tight mt-1">
-            KALENDER BALAPAN RESMI & JADWAL SESI
+          <h2 className="text-xl sm:text-2xl font-bold text-white tracking-tight mt-1">
+            Kalender Balapan & Jadwal Sesi
           </h2>
         </div>
 
         {/* Dual Filter Group: Series Selector & Status Selector */}
-        <div className="flex flex-wrap items-center gap-2.5 w-full lg:w-auto font-racing font-bold text-xs">
+        <div className="flex flex-wrap items-center gap-2.5 w-full lg:w-auto text-xs font-semibold">
           {/* Series Filter */}
-          <div className="flex items-center bg-[#0a0c10] p-0.5 rounded border border-[#232838]">
+          <div className="flex items-center bg-[#0a0c10] p-0.5 rounded-lg border border-[#232838]">
             <button
               onClick={() => handleSeriesChange('all')}
-              className={`px-3 py-1 rounded transition-all uppercase ${
+              className={`px-3 py-1 rounded-md transition-all ${
                 activeSeries === 'all'
-                  ? 'bg-[#232838] text-white shadow-xs'
+                  ? 'bg-[#232838] text-white shadow-xs font-bold'
                   : 'text-slate-400 hover:text-white'
               }`}
             >
-              SEMUA ({races.length})
+              Semua ({races.length})
             </button>
             <button
               onClick={() => handleSeriesChange('f1')}
-              className={`px-3 py-1 rounded transition-all uppercase ${
+              className={`px-3 py-1 rounded-md transition-all ${
                 activeSeries === 'f1'
-                  ? 'bg-[#e10600] text-white shadow-xs'
+                  ? 'bg-[#e10600] text-white shadow-xs font-bold'
                   : 'text-slate-400 hover:text-red-400'
               }`}
             >
@@ -99,47 +99,47 @@ export const RaceCalendar: React.FC<RaceCalendarProps> = ({
             </button>
             <button
               onClick={() => handleSeriesChange('motogp')}
-              className={`px-3 py-1 rounded transition-all uppercase ${
+              className={`px-3 py-1 rounded-md transition-all ${
                 activeSeries === 'motogp'
-                  ? 'bg-[#0070c0] text-white shadow-xs'
+                  ? 'bg-[#0070c0] text-white shadow-xs font-bold'
                   : 'text-slate-400 hover:text-sky-400'
               }`}
             >
-              MOTOGP ({motogpCount})
+              MotoGP ({motogpCount})
             </button>
           </div>
 
           {/* Status Filter */}
-          <div className="flex items-center bg-[#0a0c10] p-0.5 rounded border border-[#232838]">
+          <div className="flex items-center bg-[#0a0c10] p-0.5 rounded-lg border border-[#232838]">
             <button
               onClick={() => setFilterStatus('all')}
-              className={`px-3 py-1 rounded transition-all uppercase ${
+              className={`px-3 py-1 rounded-md transition-all ${
                 filterStatus === 'all'
-                  ? 'bg-[#232838] text-white shadow-xs'
+                  ? 'bg-[#232838] text-white shadow-xs font-bold'
                   : 'text-slate-400 hover:text-white'
               }`}
             >
-              SEMUA
+              Semua Status
             </button>
             <button
               onClick={() => setFilterStatus('upcoming')}
-              className={`px-3 py-1 rounded transition-all uppercase ${
+              className={`px-3 py-1 rounded-md transition-all ${
                 filterStatus === 'upcoming'
-                  ? 'bg-amber-500/20 text-amber-300 border border-amber-500/30'
+                  ? 'bg-amber-500/20 text-amber-300 border border-amber-500/30 font-bold'
                   : 'text-slate-400 hover:text-white'
               }`}
             >
-              AKAN DATANG
+              Akan Datang
             </button>
             <button
               onClick={() => setFilterStatus('completed')}
-              className={`px-3 py-1 rounded transition-all uppercase ${
+              className={`px-3 py-1 rounded-md transition-all ${
                 filterStatus === 'completed'
-                  ? 'bg-emerald-500/20 text-emerald-300 border border-emerald-500/30'
+                  ? 'bg-emerald-500/20 text-emerald-300 border border-emerald-500/30 font-bold'
                   : 'text-slate-400 hover:text-white'
               }`}
             >
-              SELESAI
+              Selesai
             </button>
           </div>
         </div>
@@ -202,11 +202,11 @@ export const RaceCalendar: React.FC<RaceCalendarProps> = ({
                         )}
                       </div>
 
-                      <h3 className="text-xl sm:text-2xl font-racing font-black text-white mt-1 uppercase tracking-tight hover:text-amber-400 transition-colors">
+                      <h3 className="text-lg sm:text-xl font-bold text-white mt-1 hover:text-amber-400 transition-colors">
                         {race.name}
                       </h3>
 
-                      <p className="text-xs text-slate-400 flex items-center gap-1.5 mt-0.5 font-tech">
+                      <p className="text-xs text-slate-400 flex items-center gap-1.5 mt-0.5">
                         <MapPin className="w-3 h-3 text-red-500 shrink-0" />
                         <span>{race.circuit}</span>
                       </p>
@@ -242,7 +242,7 @@ export const RaceCalendar: React.FC<RaceCalendarProps> = ({
                     ) : null}
 
                     {/* Action Buttons */}
-                    <div className="flex items-center gap-2 flex-wrap w-full sm:w-auto font-racing font-bold text-xs uppercase tracking-wider">
+                    <div className="flex items-center gap-2 flex-wrap w-full sm:w-auto text-xs font-semibold">
                       {Boolean(
                         (race.fullResults && race.fullResults.length > 0) ||
                         (race.sprintFullResults && race.sprintFullResults.length > 0) ||
@@ -254,28 +254,28 @@ export const RaceCalendar: React.FC<RaceCalendarProps> = ({
                             if (onViewRaceResult) onViewRaceResult(race);
                             setSelectedResultRace(race);
                           }}
-                          className="flex-1 sm:flex-none inline-flex items-center justify-center gap-1.5 px-3 py-1.5 rounded bg-emerald-600 hover:bg-emerald-500 text-white transition-all shadow-xs cursor-pointer active:scale-95"
+                          className="flex-1 sm:flex-none inline-flex items-center justify-center gap-1.5 px-3 py-1.5 rounded-lg bg-emerald-600 hover:bg-emerald-500 text-white font-bold transition-all shadow-xs cursor-pointer active:scale-95"
                           title="Lihat Urutan Klasifikasi Hasil Balapan Lengkap"
                         >
                           <Trophy className="w-3 h-3 text-amber-300 shrink-0" />
-                          <span>HASIL RACE</span>
+                          <span>Lihat Hasil</span>
                         </button>
                       )}
 
                       <button
                         onClick={() => onSelectCircuit(race)}
-                        className="flex-1 sm:flex-none inline-flex items-center justify-center gap-1 px-2.5 py-1.5 rounded bg-[#161a24] text-slate-300 hover:bg-[#202534] hover:text-white transition-all border border-[#232838] active:scale-95"
+                        className="flex-1 sm:flex-none inline-flex items-center justify-center gap-1 px-2.5 py-1.5 rounded-lg bg-[#161a24] text-slate-300 hover:bg-[#202534] hover:text-white transition-all border border-[#232838] active:scale-95"
                         title="Info Sirkuit"
                       >
                         <Info className="w-3 h-3 shrink-0" />
-                        <span>INFO TRACK</span>
+                        <span>Info Track</span>
                       </button>
 
                       <button
                         onClick={() => toggleExpand(race.id)}
-                        className="flex-1 sm:flex-none inline-flex items-center justify-center gap-1 px-3 py-1.5 rounded bg-[#161a24] text-slate-200 hover:bg-[#202534] transition-all border border-[#232838] active:scale-95"
+                        className="flex-1 sm:flex-none inline-flex items-center justify-center gap-1 px-3 py-1.5 rounded-lg bg-[#161a24] text-slate-200 hover:bg-[#202534] transition-all border border-[#232838] active:scale-95"
                       >
-                        <span>{isExpanded ? 'TUTUP SESI' : 'DETAIL SESI'}</span>
+                        <span>{isExpanded ? 'Tutup Sesi' : 'Detail Sesi'}</span>
                         {isExpanded ? (
                           <ChevronUp className="w-3.5 h-3.5 shrink-0" />
                         ) : (

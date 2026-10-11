@@ -57,20 +57,20 @@ export const Overview: React.FC<OverviewProps> = ({
           <div className="flex items-center justify-between pb-2 border-b border-[#1d2230]">
             <div>
               <div className="flex items-center gap-2">
-                <span className="px-2 py-0.5 text-[10px] font-mono font-black uppercase text-white bg-amber-600 rounded">
-                  OFFICIAL LEADERBOARD
+                <span className="px-2 py-0.5 text-[10px] font-semibold text-white bg-amber-600 rounded">
+                  Klasemen Sementara
                 </span>
-                <span className="text-xs font-mono text-slate-400">MUSIM {season}</span>
+                <span className="text-xs text-slate-400">Musim {season}</span>
               </div>
-              <h2 className="text-2xl font-racing font-black text-white uppercase tracking-tight mt-0.5">
-                KLASEMEN TERTINGGI KEJUARAAN DUNIA
+              <h2 className="text-2xl font-bold text-white tracking-tight mt-0.5">
+                Klasemen Teratas Musim 2026
               </h2>
             </div>
             <button
               onClick={() => setActiveTab('standings')}
-              className="text-xs font-racing font-bold tracking-wider uppercase text-slate-400 hover:text-white inline-flex items-center gap-1 transition-colors"
+              className="text-xs font-semibold text-slate-400 hover:text-white inline-flex items-center gap-1 transition-colors"
             >
-              KLASEMEN PENUH <ChevronRight className="w-3.5 h-3.5" />
+              Lihat Semua <ChevronRight className="w-3.5 h-3.5" />
             </button>
           </div>
 
@@ -79,11 +79,11 @@ export const Overview: React.FC<OverviewProps> = ({
             {(selectedSeries === 'all' || selectedSeries === 'f1') && (
               <div className="paddock-panel rounded p-3.5 border border-[#232838]">
                 <div className="flex items-center justify-between pb-2.5 border-b border-[#1c212e]">
-                  <span className="flex items-center gap-1.5 font-racing font-black text-xs uppercase tracking-wider text-[#e10600]">
+                  <span className="flex items-center gap-1.5 font-bold text-xs tracking-wide text-[#e10600]">
                     <span className="w-1.5 h-1.5 rounded-full bg-[#e10600]"></span>
-                    FORMULA 1 TOP 3
+                    Formula 1 Top 3
                   </span>
-                  <span className="text-[10px] font-mono text-slate-400 uppercase">POIN</span>
+                  <span className="text-[10px] text-slate-400">Poin</span>
                 </div>
 
                 <div className="divide-y divide-[#171b26] mt-1.5">
@@ -100,7 +100,7 @@ export const Overview: React.FC<OverviewProps> = ({
                         <DriverAvatar driver={driver} size="xs" className="shrink-0" />
                         <CountryFlag country={driver.countryCode || driver.nationality} className="w-3.5 h-2.5 rounded-xs shrink-0" />
                         <div className="min-w-0">
-                          <span className="text-xs font-racing font-bold uppercase text-white group-hover:text-amber-400 transition-colors block truncate max-w-[110px]">
+                          <span className="text-xs font-bold text-white group-hover:text-amber-400 transition-colors block truncate max-w-[110px]">
                             {driver.name}
                           </span>
                           <span className="text-[10px] text-slate-500 block truncate">
@@ -121,11 +121,11 @@ export const Overview: React.FC<OverviewProps> = ({
             {(selectedSeries === 'all' || selectedSeries === 'motogp') && (
               <div className="paddock-panel rounded p-3.5 border border-[#232838]">
                 <div className="flex items-center justify-between pb-2.5 border-b border-[#1c212e]">
-                  <span className="flex items-center gap-1.5 font-racing font-black text-xs uppercase tracking-wider text-[#0070c0]">
+                  <span className="flex items-center gap-1.5 font-bold text-xs tracking-wide text-[#0070c0]">
                     <span className="w-1.5 h-1.5 rounded-full bg-[#0070c0]"></span>
-                    MOTOGP TOP 3
+                    MotoGP Top 3
                   </span>
-                  <span className="text-[10px] font-mono text-slate-400 uppercase">POIN</span>
+                  <span className="text-[10px] text-slate-400">Poin</span>
                 </div>
 
                 <div className="divide-y divide-[#171b26] mt-1.5">
@@ -142,7 +142,7 @@ export const Overview: React.FC<OverviewProps> = ({
                         <DriverAvatar driver={driver} size="xs" className="shrink-0" />
                         <CountryFlag country={driver.countryCode || driver.nationality} className="w-3.5 h-2.5 rounded-xs shrink-0" />
                         <div className="min-w-0">
-                          <span className="text-xs font-racing font-bold uppercase text-white group-hover:text-amber-400 transition-colors block truncate max-w-[110px]">
+                          <span className="text-xs font-bold text-white group-hover:text-amber-400 transition-colors block truncate max-w-[110px]">
                             {driver.name}
                           </span>
                           <span className="text-[10px] text-slate-500 block truncate">
@@ -164,23 +164,23 @@ export const Overview: React.FC<OverviewProps> = ({
           <div className="paddock-panel rounded p-4 border border-[#232838]">
             <div className="flex items-center justify-between mb-3.5 pb-2 border-b border-[#1c212e]">
               <div>
-                <span className="text-[10px] font-mono font-bold text-slate-400 uppercase">OFFICIAL CLASSIFICATION</span>
-                <h3 className="text-lg font-racing font-black text-white uppercase tracking-tight block">
-                  HASIL GRAND PRIX & PODIUM TERBARU
+                <span className="text-[10px] font-semibold text-slate-400">Hasil Resmi</span>
+                <h3 className="text-lg font-bold text-white tracking-tight block">
+                  Hasil Grand Prix & Podium Terbaru
                 </h3>
               </div>
               <button
                 onClick={() => setActiveTab('calendar')}
-                className="text-xs font-racing font-bold tracking-wider uppercase text-slate-400 hover:text-white flex items-center gap-1 transition-colors"
+                className="text-xs font-semibold text-slate-400 hover:text-white flex items-center gap-1 transition-colors"
               >
-                SEMUA HASIL <ChevronRight className="w-3 h-3" />
+                Lihat Semua <ChevronRight className="w-3 h-3" />
               </button>
             </div>
 
             {recentRaces.length === 0 ? (
               <div className="p-6 bg-[#0a0c10] border border-[#1a1f2c] rounded text-center">
-                <p className="text-xs text-slate-400 font-mono">
-                  MEMUAT DATA PODIUM RESMI SESI TERKINI...
+                <p className="text-xs text-slate-400">
+                  Memuat data podium sesi terkini...
                 </p>
               </div>
             ) : (
@@ -200,10 +200,10 @@ export const Overview: React.FC<OverviewProps> = ({
                         <div className="flex items-center justify-between text-xs pb-2 border-b border-[#181c26]">
                           <span className="flex items-center gap-1.5 font-bold text-white min-w-0">
                             <CountryFlag country={race.countryCode || race.country} className="w-3.5 h-2.5 rounded-xs shrink-0" />
-                            <span className="truncate font-racing uppercase tracking-tight">{race.name}</span>
+                            <span className="truncate font-semibold tracking-tight">{race.name}</span>
                           </span>
                           <span
-                            className={`text-[9px] font-black uppercase px-1.5 py-0.2 rounded shrink-0 ${
+                            className={`text-[9px] font-bold px-1.5 py-0.2 rounded shrink-0 ${
                               isF1 ? 'bg-[#e10600] text-white' : 'bg-[#0070c0] text-white'
                             }`}
                           >
@@ -215,13 +215,13 @@ export const Overview: React.FC<OverviewProps> = ({
                         {hasMainResult && race.result && (
                           <div className="mt-2 space-y-1 text-xs">
                             <div className="flex items-center justify-between text-[11px]">
-                              <span className="text-slate-400">P1 WINNER:</span>
-                              <span className="font-racing font-black text-amber-400 uppercase text-sm truncate max-w-[160px]">
+                              <span className="text-slate-400">Pemenang:</span>
+                              <span className="font-bold text-amber-400 text-sm truncate max-w-[160px]">
                                 {race.result.winner}
                               </span>
                             </div>
                             <div className="flex items-center justify-between text-[10px] text-slate-400">
-                              <span className="text-slate-500">PODIUM:</span>
+                              <span className="text-slate-500">Podium:</span>
                               <span className="text-slate-300 truncate max-w-[160px]">
                                 P2 {race.result.p2} • P3 {race.result.p3}
                               </span>
@@ -233,13 +233,13 @@ export const Overview: React.FC<OverviewProps> = ({
                         {!hasMainResult && hasSprintResult && race.sprintResult && (
                           <div className="mt-2 space-y-1 text-xs">
                             <div className="flex items-center justify-between text-[11px]">
-                              <span className="text-amber-400">SPRINT WIN:</span>
-                              <span className="font-racing font-black text-amber-400 uppercase text-sm truncate max-w-[160px]">
+                              <span className="text-amber-400">Pemenang Sprint:</span>
+                              <span className="font-bold text-amber-400 text-sm truncate max-w-[160px]">
                                 {race.sprintResult.winner}
                               </span>
                             </div>
                             <div className="flex items-center justify-between text-[10px] text-slate-400">
-                              <span className="text-slate-500">PODIUM:</span>
+                              <span className="text-slate-500">Podium:</span>
                               <span className="text-slate-300 truncate max-w-[160px]">
                                 P2 {race.sprintResult.p2} • P3 {race.sprintResult.p3}
                               </span>
@@ -255,10 +255,10 @@ export const Overview: React.FC<OverviewProps> = ({
                             if (onViewRaceResult) onViewRaceResult(race);
                             setSelectedResultRace(race);
                           }}
-                          className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded bg-emerald-600 hover:bg-emerald-500 text-white text-[11px] font-racing font-bold uppercase tracking-wider transition-all"
+                          className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded bg-emerald-600 hover:bg-emerald-500 text-white text-[11px] font-semibold tracking-wide transition-all"
                         >
                           <Trophy className="w-3 h-3 text-amber-300" />
-                          <span>HASIL RACE LENGKAP</span>
+                          <span>Hasil Race Lengkap</span>
                         </button>
                       </div>
                     </div>
@@ -273,16 +273,16 @@ export const Overview: React.FC<OverviewProps> = ({
         <div className="lg:col-span-5 space-y-4">
           <div className="flex items-center justify-between pb-2 border-b border-[#1d2230]">
             <div>
-              <span className="text-[10px] font-mono font-bold text-rose-500 uppercase">PADDOCK PRESS</span>
-              <h2 className="text-2xl font-racing font-black text-white uppercase tracking-tight block">
-                BERITA RESMI & TEKNIS
+              <span className="text-[10px] font-semibold text-rose-500">Paddock Press</span>
+              <h2 className="text-2xl font-bold text-white tracking-tight block">
+                Berita Terkini & Teknis
               </h2>
             </div>
             <button
               onClick={() => setActiveTab('news')}
-              className="text-xs font-racing font-bold tracking-wider uppercase text-slate-400 hover:text-white inline-flex items-center gap-1 transition-colors"
+              className="text-xs font-semibold text-slate-400 hover:text-white inline-flex items-center gap-1 transition-colors"
             >
-              SEMUA BERITA <ChevronRight className="w-3.5 h-3.5" />
+              Lihat Semua <ChevronRight className="w-3.5 h-3.5" />
             </button>
           </div>
 

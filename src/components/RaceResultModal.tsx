@@ -48,9 +48,6 @@ export const RaceResultModal: React.FC<RaceResultModalProps> = ({ race, onClose 
         className="relative w-full max-w-4xl bg-[#0e1017] border border-[#232838] rounded shadow-2xl overflow-hidden flex flex-col max-h-[92vh] my-auto"
         onClick={(e) => e.stopPropagation()}
       >
-        {/* Top Kerb Accent Strip */}
-        <div className={`h-1.5 w-full ${isF1 ? 'kerb-red-white' : 'kerb-blue-white'}`} />
-
         {/* Modal Header */}
         <div className="bg-[#090b10] p-4 sm:p-5 border-b border-[#1f2434]">
           <div className="flex items-start justify-between gap-3 sm:gap-4">
