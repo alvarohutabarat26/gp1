@@ -2,26 +2,125 @@
 
 @layer base {
   body {
-    background-color: #090a0f;
-    color: #f1f5f9;
-    font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+    background-color: #08090d;
+    color: #e2e8f0;
+    font-family: 'Titillium Web', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
     overflow-x: hidden;
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    font-family: 'Barlow Condensed', 'Titillium Web', sans-serif;
+    letter-spacing: -0.01em;
   }
 }
 
-/* Custom motorsport styling */
-.glass-panel {
-  background: rgba(15, 23, 42, 0.75);
-  backdrop-filter: blur(12px);
-  border: 1px solid rgba(255, 255, 255, 0.08);
+/* Authentic Motorsport Utility Classes */
+.font-racing {
+  font-family: 'Barlow Condensed', sans-serif;
 }
 
-.glass-panel:hover {
-  border-color: rgba(255, 255, 255, 0.16);
+.font-tech {
+  font-family: 'Titillium Web', sans-serif;
 }
 
-.carbon-texture {
-  background-color: #0b0d14;
-  background-image: radial-gradient(rgba(255, 255, 255, 0.04) 1px, transparent 0);
-  background-size: 16px 16px;
+.font-mono {
+  font-family: 'JetBrains Mono', monospace;
+}
+
+/* Precision Paddock Card Surfaces (eliminating blurry AI gradients) */
+.paddock-panel {
+  background-color: #101217;
+  border: 1px solid #1f232f;
+  box-shadow: 0 4px 20px -2px rgba(0, 0, 0, 0.7);
+}
+
+.paddock-panel-elevated {
+  background-color: #14171f;
+  border: 1px solid #282e3e;
+}
+
+.paddock-panel-interactive {
+  background-color: #101217;
+  border: 1px solid #1f232f;
+  transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.paddock-panel-interactive:hover {
+  background-color: #141720;
+  border-color: #3b4255;
+  transform: translateY(-2px);
+  box-shadow: 0 12px 28px -4px rgba(0, 0, 0, 0.85);
+}
+
+/* Authentic Carbon Fiber Weave */
+.carbon-weave {
+  background-color: #0b0c10;
+  background-image: 
+    linear-gradient(45deg, #111318 25%, transparent 25%),
+    linear-gradient(-45deg, #111318 25%, transparent 25%),
+    linear-gradient(45deg, transparent 75%, #111318 75%),
+    linear-gradient(-45deg, transparent 75%, #111318 75%);
+  background-size: 6px 6px;
+  background-position: 0 0, 0 3px, 3px -3px, -3px 0px;
+}
+
+/* Telemetry Grid Line */
+.telemetry-grid {
+  background-size: 24px 24px;
+  background-image: 
+    linear-gradient(to right, rgba(255, 255, 255, 0.03) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(255, 255, 255, 0.03) 1px, transparent 1px);
+}
+
+/* Apex Kerb Rumble Strip Accent */
+.kerb-red-white {
+  background: repeating-linear-gradient(
+    -45deg,
+    #e10600,
+    #e10600 8px,
+    #ffffff 8px,
+    #ffffff 16px
+  );
+}
+
+.kerb-blue-white {
+  background: repeating-linear-gradient(
+    -45deg,
+    #00b2fe,
+    #00b2fe 8px,
+    #ffffff 8px,
+    #ffffff 16px
+  );
+}
+
+/* Speed Cut Chamfer Corners (Aerodynamic endplate design) */
+.speed-cut-tr {
+  clip-path: polygon(0 0, calc(100% - 14px) 0, 100% 14px, 100% 100%, 0 100%);
+}
+
+.speed-cut-bl {
+  clip-path: polygon(0 0, 100% 0, 100% 100%, 14px 100%, 0 calc(100% - 14px));
+}
+
+.speed-cut-both {
+  clip-path: polygon(14px 0, 100% 0, 100% calc(100% - 14px), calc(100% - 14px) 100%, 0 100%, 0 14px);
+}
+
+/* Official Chequered Flag Strip */
+.chequered-strip {
+  background-image:
+    linear-gradient(45deg, #fff 25%, transparent 25%),
+    linear-gradient(-45deg, #fff 25%, transparent 25%),
+    linear-gradient(45deg, transparent 75%, #fff 75%),
+    linear-gradient(-45deg, transparent 75%, #fff 75%);
+  background-size: 8px 8px;
+  background-position: 0 0, 0 4px, 4px -4px, -4px 0px;
+  opacity: 0.18;
+}
+
+/* Timing Screen Digital Box */
+.timing-box {
+  background: #090b0f;
+  border: 1px solid #232838;
+  font-family: 'JetBrains Mono', monospace;
 }

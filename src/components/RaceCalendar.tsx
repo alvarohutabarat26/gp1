@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Calendar, Clock, Trophy, MapPin, ChevronDown, ChevronUp, CheckCircle, Flame, Info } from 'lucide-react';
+import { Calendar, Clock, Trophy, MapPin, ChevronDown, ChevronUp, CheckCircle, Flame, Info, Flag } from 'lucide-react';
 import { Race, SeriesType } from '../types/motorsport';
 import { CountryFlag } from './CountryFlag';
 import { RaceResultModal } from './RaceResultModal';
@@ -58,107 +58,98 @@ export const RaceCalendar: React.FC<RaceCalendarProps> = ({
   };
 
   return (
-    <div className="space-y-6">
+    <div className="space-y-5 font-tech">
       {/* Top Filter and Controls Bar */}
-      <div className="flex flex-col lg:flex-row items-start lg:items-center justify-between gap-4 bg-slate-900/70 p-4 sm:p-5 rounded-2xl border border-slate-800 shadow-md">
+      <div className="paddock-panel p-4 rounded flex flex-col lg:flex-row items-start lg:items-center justify-between gap-4 border border-[#232838]">
         <div>
-          <h2 className="text-xl font-black text-white flex items-center gap-2">
-            <Calendar className="w-5 h-5 text-sky-400" />
-            Kalender Balapan Resmi & Jadwal Sesi
+          <div className="flex items-center gap-2">
+            <span className="px-2 py-0.5 text-[10px] font-mono font-black uppercase text-white bg-sky-600 rounded">
+              OFFICIAL 2026 CALENDAR
+            </span>
+            <span className="text-xs font-mono text-slate-400">WAKTU {timezone}</span>
+          </div>
+          <h2 className="text-2xl sm:text-3xl font-racing font-black text-white uppercase tracking-tight mt-1">
+            KALENDER BALAPAN RESMI & JADWAL SESI
           </h2>
-          <p className="text-xs text-slate-400 mt-0.5">
-            Jadwal sesi latihan, kualifikasi, sprint, dan balapan utama disesuaikan ke waktu <strong>{timezone}</strong>.
-          </p>
         </div>
 
         {/* Dual Filter Group: Series Selector & Status Selector */}
-        <div className="flex flex-wrap items-center gap-3 w-full lg:w-auto">
-          {/* 1. Series Filter (F1 vs MotoGP vs Semua) */}
-          <div className="flex items-center bg-slate-950 p-1 rounded-xl border border-slate-800 text-xs font-bold shadow-inner">
+        <div className="flex flex-wrap items-center gap-2.5 w-full lg:w-auto font-racing font-bold text-xs">
+          {/* Series Filter */}
+          <div className="flex items-center bg-[#0a0c10] p-0.5 rounded border border-[#232838]">
             <button
               onClick={() => handleSeriesChange('all')}
-              className={`px-3 py-1.5 rounded-lg transition-all flex items-center gap-1.5 ${
+              className={`px-3 py-1 rounded transition-all uppercase ${
                 activeSeries === 'all'
-                  ? 'bg-slate-800 text-white shadow-sm ring-1 ring-slate-700'
+                  ? 'bg-[#232838] text-white shadow-xs'
                   : 'text-slate-400 hover:text-white'
               }`}
             >
-              <span>Semua</span>
-              <span className="text-[10px] px-1.5 py-0.2 rounded-full bg-slate-900 text-slate-400">
-                {races.length}
-              </span>
+              SEMUA ({races.length})
             </button>
             <button
               onClick={() => handleSeriesChange('f1')}
-              className={`px-3 py-1.5 rounded-lg transition-all flex items-center gap-1.5 ${
+              className={`px-3 py-1 rounded transition-all uppercase ${
                 activeSeries === 'f1'
-                  ? 'bg-red-600 text-white shadow-md shadow-red-950/50'
+                  ? 'bg-[#e10600] text-white shadow-xs'
                   : 'text-slate-400 hover:text-red-400'
               }`}
             >
-              <span className="w-2 h-2 rounded-full bg-red-500"></span>
-              <span>Formula 1</span>
-              <span className="text-[10px] px-1.5 py-0.2 rounded-full bg-slate-900/80 text-slate-300">
-                {f1Count}
-              </span>
+              F1 ({f1Count})
             </button>
             <button
               onClick={() => handleSeriesChange('motogp')}
-              className={`px-3 py-1.5 rounded-lg transition-all flex items-center gap-1.5 ${
+              className={`px-3 py-1 rounded transition-all uppercase ${
                 activeSeries === 'motogp'
-                  ? 'bg-orange-600 text-white shadow-md shadow-orange-950/50'
-                  : 'text-slate-400 hover:text-orange-400'
+                  ? 'bg-[#0070c0] text-white shadow-xs'
+                  : 'text-slate-400 hover:text-sky-400'
               }`}
             >
-              <span className="w-2 h-2 rounded-full bg-orange-500"></span>
-              <span>MotoGP</span>
-              <span className="text-[10px] px-1.5 py-0.2 rounded-full bg-slate-900/80 text-slate-300">
-                {motogpCount}
-              </span>
+              MOTOGP ({motogpCount})
             </button>
           </div>
 
-          {/* 2. Status Filter (Akan Datang vs Selesai) */}
-          <div className="flex items-center bg-slate-950 p-1 rounded-xl border border-slate-800 text-xs font-bold shadow-inner">
+          {/* Status Filter */}
+          <div className="flex items-center bg-[#0a0c10] p-0.5 rounded border border-[#232838]">
             <button
               onClick={() => setFilterStatus('all')}
-              className={`px-3 py-1.5 rounded-lg transition-all ${
+              className={`px-3 py-1 rounded transition-all uppercase ${
                 filterStatus === 'all'
-                  ? 'bg-slate-800 text-white shadow-sm'
+                  ? 'bg-[#232838] text-white shadow-xs'
                   : 'text-slate-400 hover:text-white'
               }`}
             >
-              Semua Status
+              SEMUA
             </button>
             <button
               onClick={() => setFilterStatus('upcoming')}
-              className={`px-3 py-1.5 rounded-lg transition-all ${
+              className={`px-3 py-1 rounded transition-all uppercase ${
                 filterStatus === 'upcoming'
                   ? 'bg-amber-500/20 text-amber-300 border border-amber-500/30'
                   : 'text-slate-400 hover:text-white'
               }`}
             >
-              Akan Datang
+              AKAN DATANG
             </button>
             <button
               onClick={() => setFilterStatus('completed')}
-              className={`px-3 py-1.5 rounded-lg transition-all ${
+              className={`px-3 py-1 rounded transition-all uppercase ${
                 filterStatus === 'completed'
                   ? 'bg-emerald-500/20 text-emerald-300 border border-emerald-500/30'
                   : 'text-slate-400 hover:text-white'
               }`}
             >
-              Selesai
+              SELESAI
             </button>
           </div>
         </div>
       </div>
 
       {/* Race List Grid */}
-      <div className="grid grid-cols-1 gap-4">
+      <div className="grid grid-cols-1 gap-3.5">
         {filteredRaces.length === 0 ? (
-          <div className="text-center py-12 bg-slate-900/40 rounded-2xl border border-slate-800">
-            <p className="text-slate-400 text-sm">Tidak ada balapan yang sesuai dengan filter pencarian.</p>
+          <div className="text-center py-12 paddock-panel rounded border border-[#232838]">
+            <p className="text-slate-400 text-sm font-mono">TIDAK ADA BALAPAN YANG SESUAI DENGAN PENCARIAN.</p>
           </div>
         ) : (
           filteredRaces.map((race) => {
@@ -168,84 +159,82 @@ export const RaceCalendar: React.FC<RaceCalendarProps> = ({
             return (
               <div
                 key={race.id}
-                className="bg-slate-900/70 border border-slate-800 rounded-2xl overflow-hidden hover:border-slate-700 transition-all shadow-md"
+                className="paddock-panel-interactive rounded overflow-hidden border border-[#1f232f]"
               >
                 {/* Main Card Header */}
-                <div className="p-4 sm:p-5 flex flex-col md:flex-row items-start md:items-center justify-between gap-4">
-                  <div className="flex items-start gap-4">
+                <div className="p-3.5 sm:p-4 flex flex-col md:flex-row items-start md:items-center justify-between gap-3.5">
+                  <div className="flex items-start gap-3.5">
                     {/* Series Badge & Round */}
-                    <div className="flex flex-col items-center justify-center min-w-[58px] p-2 rounded-xl bg-slate-950 border border-slate-800 text-center">
+                    <div className="flex flex-col items-center justify-center min-w-[54px] p-2 rounded bg-[#0a0c10] border border-[#1e2330] text-center font-racing">
                       <span
-                        className={`text-[10px] font-black uppercase px-1.5 py-0.5 rounded ${
-                          isF1
-                            ? 'bg-red-600 text-white'
-                            : 'bg-orange-600 text-white'
+                        className={`text-[9px] font-black uppercase px-1.5 py-0.2 rounded ${
+                          isF1 ? 'bg-[#e10600] text-white' : 'bg-[#0070c0] text-white'
                         }`}
                       >
-                        {isF1 ? 'F1' : 'MotoGP'}
+                        {isF1 ? 'F1' : 'MOTOGP'}
                       </span>
-                      <span className="text-xs font-mono font-bold text-slate-300 mt-1">
-                        R{race.round}
+                      <span className="text-sm font-black text-white mt-0.5 leading-none">
+                        R{String(race.round).padStart(2, '0')}
                       </span>
                     </div>
 
                     {/* Race Details */}
                     <div>
                       <div className="flex items-center gap-2">
-                        <CountryFlag country={race.countryCode || race.country} className="w-5 h-3.5 rounded-xs" />
-                        <span className="text-xs font-bold text-slate-400">{race.country}</span>
+                        <CountryFlag country={race.countryCode || race.country} className="w-4 h-3 rounded-xs shrink-0 shadow-xs" />
+                        <span className="text-xs font-mono font-bold text-slate-400 uppercase">{race.country}</span>
                         {race.isSprintWeekend && (
-                          <span className="inline-flex items-center gap-1 text-[10px] font-bold text-amber-400 bg-amber-500/10 px-2 py-0.5 rounded-full border border-amber-500/20">
+                          <span className="inline-flex items-center gap-1 text-[9px] font-mono font-bold text-amber-400 bg-amber-950/50 px-1.5 py-0.2 rounded border border-amber-600/30 uppercase">
                             <Flame className="w-2.5 h-2.5" />
-                            Sprint
+                            SPRINT
                           </span>
                         )}
                         {race.status === 'completed' ? (
-                          <span className="inline-flex items-center gap-1 text-[10px] font-bold text-emerald-400 bg-emerald-500/10 px-2 py-0.5 rounded-full border border-emerald-500/20">
+                          <span className="inline-flex items-center gap-1 text-[9px] font-mono font-bold text-emerald-400 bg-emerald-950/50 px-1.5 py-0.2 rounded border border-emerald-500/30 uppercase">
                             <CheckCircle className="w-2.5 h-2.5" />
-                            Selesai
+                            SELESAI
                           </span>
                         ) : (
-                          <span className="inline-flex items-center gap-1 text-[10px] font-bold text-sky-400 bg-sky-500/10 px-2 py-0.5 rounded-full border border-sky-500/20">
+                          <span className="inline-flex items-center gap-1 text-[9px] font-mono font-bold text-sky-400 bg-sky-950/50 px-1.5 py-0.2 rounded border border-sky-500/30 uppercase">
                             <Clock className="w-2.5 h-2.5" />
-                            Akan Datang
+                            UPCOMING
                           </span>
                         )}
                       </div>
 
-                      <h3 className="text-lg font-bold text-white mt-1 hover:text-red-400 transition-colors">
+                      <h3 className="text-xl sm:text-2xl font-racing font-black text-white mt-1 uppercase tracking-tight hover:text-amber-400 transition-colors">
                         {race.name}
                       </h3>
 
-                      <p className="text-xs text-slate-400 flex items-center gap-1.5 mt-0.5">
-                        <MapPin className="w-3.5 h-3.5 text-slate-500 shrink-0" />
+                      <p className="text-xs text-slate-400 flex items-center gap-1.5 mt-0.5 font-tech">
+                        <MapPin className="w-3 h-3 text-red-500 shrink-0" />
                         <span>{race.circuit}</span>
                       </p>
                     </div>
                   </div>
 
                   {/* Right side: Result snippet & Action buttons */}
-                  <div className="flex flex-col sm:flex-row md:flex-col items-start sm:items-center md:items-end justify-between w-full md:w-auto gap-3 pt-3 md:pt-0 border-t md:border-t-0 border-slate-800/80">
+                  <div className="flex flex-col sm:flex-row md:flex-col items-start sm:items-center md:items-end justify-between w-full md:w-auto gap-2.5 pt-3 md:pt-0 border-t md:border-t-0 border-[#1c202c]">
                     {race.result ? (
-                      <div className="text-left md:text-right">
+                      <div className="text-left md:text-right font-mono">
                         <div className="flex items-center gap-1.5 text-xs text-amber-400 font-bold">
                           <Trophy className="w-3.5 h-3.5 shrink-0" />
-                          <span>Juara: {race.result.winner}</span>
+                          <span>P1: {race.result.winner}</span>
                         </div>
                         {race.result.p2 && race.result.p3 && (
-                          <span className="text-[11px] text-slate-400 block mt-0.5">
+                          <span className="text-[10px] text-slate-400 block mt-0.5">
                             Podium: {race.result.p2} & {race.result.p3}
                           </span>
                         )}
                       </div>
                     ) : race.sprintResult ? (
-                      <div className="text-left md:text-right">
+                      <div className="text-left md:text-right font-mono">
                         <div className="flex items-center gap-1.5 text-xs text-amber-400 font-bold">
                           <Flame className="w-3.5 h-3.5 text-amber-400 shrink-0" />
                           <span>Sprint: {race.sprintResult.winner}</span>
                         </div>
                         {race.sprintResult.p2 && race.sprintResult.p3 && (
-                          <span className="text-[11px] text-slate-400 block mt-0.5">
+                          <span className="text-[10px] text-slate-400 block mt-0.5">
                             Podium: {race.sprintResult.p2} & {race.sprintResult.p3}
                           </span>
                         )}
@@ -253,8 +242,7 @@ export const RaceCalendar: React.FC<RaceCalendarProps> = ({
                     ) : null}
 
                     {/* Action Buttons */}
-                    <div className="flex items-center gap-2 flex-wrap w-full sm:w-auto">
-                      {/* Lihat Hasil button (for completed races or races with results) */}
+                    <div className="flex items-center gap-2 flex-wrap w-full sm:w-auto font-racing font-bold text-xs uppercase tracking-wider">
                       {Boolean(
                         (race.fullResults && race.fullResults.length > 0) ||
                         (race.sprintFullResults && race.sprintFullResults.length > 0) ||
@@ -266,28 +254,28 @@ export const RaceCalendar: React.FC<RaceCalendarProps> = ({
                             if (onViewRaceResult) onViewRaceResult(race);
                             setSelectedResultRace(race);
                           }}
-                          className="flex-1 sm:flex-none inline-flex items-center justify-center gap-1.5 px-3 py-1.5 sm:py-1 rounded-lg bg-emerald-600 hover:bg-emerald-500 text-white text-xs font-bold transition-all shadow-md shadow-emerald-950/40 border border-emerald-500/40 cursor-pointer active:scale-95"
+                          className="flex-1 sm:flex-none inline-flex items-center justify-center gap-1.5 px-3 py-1.5 rounded bg-emerald-600 hover:bg-emerald-500 text-white transition-all shadow-xs cursor-pointer active:scale-95"
                           title="Lihat Urutan Klasifikasi Hasil Balapan Lengkap"
                         >
-                          <Trophy className="w-3.5 h-3.5 text-amber-300 shrink-0" />
-                          <span>Lihat Hasil</span>
+                          <Trophy className="w-3 h-3 text-amber-300 shrink-0" />
+                          <span>HASIL RACE</span>
                         </button>
                       )}
 
                       <button
                         onClick={() => onSelectCircuit(race)}
-                        className="flex-1 sm:flex-none inline-flex items-center justify-center gap-1 px-2.5 py-1.5 sm:py-1 rounded-lg bg-slate-800 text-slate-300 text-xs font-semibold hover:bg-slate-700 hover:text-white transition-all border border-slate-700/60 active:scale-95"
+                        className="flex-1 sm:flex-none inline-flex items-center justify-center gap-1 px-2.5 py-1.5 rounded bg-[#161a24] text-slate-300 hover:bg-[#202534] hover:text-white transition-all border border-[#232838] active:scale-95"
                         title="Info Sirkuit"
                       >
-                        <Info className="w-3.5 h-3.5 shrink-0" />
-                        <span>Info Track</span>
+                        <Info className="w-3 h-3 shrink-0" />
+                        <span>INFO TRACK</span>
                       </button>
 
                       <button
                         onClick={() => toggleExpand(race.id)}
-                        className="flex-1 sm:flex-none inline-flex items-center justify-center gap-1 px-3 py-1.5 sm:py-1 rounded-lg bg-slate-800 text-slate-200 text-xs font-bold hover:bg-slate-700 transition-all border border-slate-700/60 active:scale-95"
+                        className="flex-1 sm:flex-none inline-flex items-center justify-center gap-1 px-3 py-1.5 rounded bg-[#161a24] text-slate-200 hover:bg-[#202534] transition-all border border-[#232838] active:scale-95"
                       >
-                        <span>{isExpanded ? 'Tutup Sesi' : 'Detail Sesi'}</span>
+                        <span>{isExpanded ? 'TUTUP SESI' : 'DETAIL SESI'}</span>
                         {isExpanded ? (
                           <ChevronUp className="w-3.5 h-3.5 shrink-0" />
                         ) : (
@@ -300,31 +288,31 @@ export const RaceCalendar: React.FC<RaceCalendarProps> = ({
 
                 {/* Expanded Session Schedule Breakdown */}
                 {isExpanded && (
-                  <div className="border-t border-slate-800 bg-slate-950/60 p-4 sm:p-5">
-                    <div className="flex items-center justify-between mb-3">
-                      <span className="text-xs font-mono font-bold uppercase tracking-wider text-slate-400">
-                        Jadwal Lengkap Sesi Balap ({timezone})
+                  <div className="border-t border-[#1c202d] bg-[#0a0c10] p-4">
+                    <div className="flex items-center justify-between mb-3 font-mono text-xs">
+                      <span className="font-bold uppercase tracking-wider text-slate-400">
+                        JADWAL RESMI SESI AKHIR PEKAN ({timezone})
                       </span>
-                      <span className="text-xs text-slate-500 font-mono">
-                        {race.circuitLengthKm} km • {race.laps} Laps
+                      <span className="text-slate-500">
+                        {race.circuitLengthKm} KM • {race.laps} LAPS
                       </span>
                     </div>
 
-                    <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-3">
+                    <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-2 font-mono">
                       {race.sessions.map((session, index) => (
                         <div
                           key={index}
-                          className="bg-slate-900/80 border border-slate-800 rounded-xl p-3 hover:border-slate-700 transition-all"
+                          className="bg-[#10131b] border border-[#1d2230] rounded p-2.5 hover:border-slate-600 transition-all"
                         >
-                          <span className="text-xs font-bold text-slate-300 block truncate">
+                          <span className="text-xs font-bold text-slate-200 block truncate uppercase">
                             {session.name}
                           </span>
-                          <span className="text-sm font-mono font-black text-amber-400 block mt-1">
+                          <span className="text-sm font-racing font-black text-amber-400 block mt-0.5">
                             {session.wibTime}
                           </span>
                           <div className="flex items-center justify-between mt-1 text-[11px] text-slate-500">
                             <span>{session.date}</span>
-                            <span className="font-mono text-[10px] text-slate-600">{session.utcTime}</span>
+                            <span className="text-[10px] text-slate-600">{session.utcTime}</span>
                           </div>
                         </div>
                       ))}

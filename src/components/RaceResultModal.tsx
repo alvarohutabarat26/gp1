@@ -42,38 +42,41 @@ export const RaceResultModal: React.FC<RaceResultModalProps> = ({ race, onClose 
   return (
     <div
       onClick={onClose}
-      className="fixed inset-0 z-50 flex items-center justify-center p-2.5 sm:p-4 md:p-6 bg-black/85 backdrop-blur-md animate-fade-in overflow-y-auto"
+      className="fixed inset-0 z-50 flex items-center justify-center p-2.5 sm:p-4 md:p-6 bg-black/90 backdrop-blur-md overflow-y-auto font-tech"
     >
       <div
-        className="relative w-full max-w-4xl bg-slate-900 border border-slate-800 rounded-2xl sm:rounded-3xl shadow-2xl overflow-hidden flex flex-col max-h-[92vh] my-auto"
+        className="relative w-full max-w-4xl bg-[#0e1017] border border-[#232838] rounded shadow-2xl overflow-hidden flex flex-col max-h-[92vh] my-auto"
         onClick={(e) => e.stopPropagation()}
       >
+        {/* Top Kerb Accent Strip */}
+        <div className={`h-1.5 w-full ${isF1 ? 'kerb-red-white' : 'kerb-blue-white'}`} />
+
         {/* Modal Header */}
-        <div className="relative bg-gradient-to-r from-slate-950 via-slate-900 to-slate-950 p-4 sm:p-6 border-b border-slate-800">
+        <div className="bg-[#090b10] p-4 sm:p-5 border-b border-[#1f2434]">
           <div className="flex items-start justify-between gap-3 sm:gap-4">
-            <div className="flex items-center gap-2.5 sm:gap-3 min-w-0">
+            <div className="flex items-center gap-3 min-w-0">
               <CountryFlag
                 country={race.countryCode || race.country || 'gb'}
                 className="w-8 h-5.5 sm:w-10 sm:h-7 rounded-xs shadow-md shrink-0"
               />
               <div className="min-w-0">
-                <div className="flex items-center gap-2 flex-wrap">
+                <div className="flex items-center gap-2 flex-wrap font-mono text-[10px]">
                   <span
-                    className={`text-[10px] font-black uppercase px-2 py-0.5 rounded font-mono ${
-                      isF1 ? 'bg-red-600 text-white' : 'bg-orange-600 text-white'
+                    className={`font-black uppercase px-2 py-0.5 rounded text-white ${
+                      isF1 ? 'bg-[#e10600]' : 'bg-[#0070c0]'
                     }`}
                   >
-                    {isF1 ? 'FORMULA 1' : 'MOTOGP'} • ROUND {race.round}
+                    {isF1 ? 'FIA FORMULA 1' : 'FIM MOTOGP'} • R{String(race.round).padStart(2, '0')}
                   </span>
-                  <span className="inline-flex items-center gap-1 text-[11px] font-bold text-emerald-400 bg-emerald-500/10 px-2 py-0.5 rounded border border-emerald-500/20">
-                    <ShieldCheck className="w-3.5 h-3.5" />
-                    Hasil Resmi & Terverifikasi
+                  <span className="inline-flex items-center gap-1 font-bold text-emerald-400 bg-emerald-950/40 px-2 py-0.5 rounded border border-emerald-500/20">
+                    <ShieldCheck className="w-3 h-3" />
+                    OFFICIAL CLASSIFICATION
                   </span>
                 </div>
-                <h2 className="text-xl sm:text-2xl font-black text-white mt-1">
+                <h2 className="text-xl sm:text-3xl font-racing font-black text-white mt-1 uppercase tracking-tight">
                   {race.name}
                 </h2>
-                <p className="text-xs text-slate-400 mt-0.5 flex items-center gap-2">
+                <p className="text-xs text-slate-400 mt-0.5 flex items-center gap-2 font-tech">
                   <span>{race.circuit}</span>
                   <span>•</span>
                   <span>{race.city}, {race.country}</span>
@@ -83,139 +86,135 @@ export const RaceResultModal: React.FC<RaceResultModalProps> = ({ race, onClose 
 
             <button
               onClick={onClose}
-              className="p-2 text-slate-400 hover:text-white bg-slate-800/60 hover:bg-slate-800 rounded-xl transition-all shrink-0"
+              className="p-1.5 text-slate-400 hover:text-white bg-[#141722] hover:bg-[#1d2230] rounded border border-[#232838] transition-all shrink-0"
               aria-label="Tutup"
             >
-              <X className="w-5 h-5" />
+              <X className="w-4 h-4" />
             </button>
           </div>
 
           {/* Tab Switcher if Sprint exists */}
           {hasSprintResults && (
-            <div className="flex items-center gap-2 mt-4 pt-3 border-t border-slate-800/80">
+            <div className="flex items-center gap-2 mt-3 pt-3 border-t border-[#1a1f2c] font-racing text-xs font-bold uppercase tracking-wider">
               {hasMainResults && (
                 <button
                   onClick={() => setActiveTab('main')}
-                  className={`px-3.5 py-1.5 rounded-xl text-xs font-bold transition-all flex items-center gap-1.5 ${
+                  className={`px-3 py-1.5 rounded transition-all flex items-center gap-1.5 ${
                     activeTab === 'main'
-                      ? 'bg-red-600 text-white shadow-md'
-                      : 'bg-slate-800/60 text-slate-400 hover:text-white'
+                      ? 'bg-[#e10600] text-white shadow-xs'
+                      : 'bg-[#12151d] text-slate-400 hover:text-white border border-[#202534]'
                   }`}
                 >
-                  <Trophy className="w-3.5 h-3.5 text-amber-300" />
-                  Grand Prix Main Race
+                  <Trophy className="w-3.5 h-3.5 text-white" />
+                  GRAND PRIX MAIN RACE
                 </button>
               )}
               <button
                 onClick={() => setActiveTab('sprint')}
-                className={`px-3.5 py-1.5 rounded-xl text-xs font-bold transition-all flex items-center gap-1.5 ${
+                className={`px-3 py-1.5 rounded transition-all flex items-center gap-1.5 ${
                   activeTab === 'sprint'
-                    ? 'bg-amber-600 text-white shadow-md'
-                    : 'bg-slate-800/60 text-slate-400 hover:text-white'
+                    ? 'bg-amber-600 text-white shadow-xs'
+                    : 'bg-[#12151d] text-slate-400 hover:text-white border border-[#202534]'
                 }`}
               >
-                <Flame className="w-3.5 h-3.5 text-amber-300" />
-                Sprint Race
+                <Flame className="w-3.5 h-3.5 text-white" />
+                SPRINT RACE
               </button>
             </div>
           )}
         </div>
 
-        {/* Modal Body: Google-style Race Classification Table */}
-        <div className="flex-1 overflow-y-auto p-4 sm:p-6">
+        {/* Modal Body: Race Classification Table */}
+        <div className="flex-1 overflow-y-auto p-3 sm:p-5">
           {activeResults.length === 0 ? (
-            <div className="py-16 text-center space-y-3">
+            <div className="py-16 text-center space-y-3 font-mono">
               <Trophy className="w-12 h-12 text-slate-600 mx-auto" />
-              <h3 className="text-base font-bold text-slate-300">
-                Data Hasil Detail Sesi Sedang Diproses
+              <h3 className="text-base font-bold text-slate-300 uppercase">
+                DATA HASIL DETAIL SESI SEDANG DIPROSES
               </h3>
               <p className="text-xs text-slate-500 max-w-md mx-auto">
                 {activeTab === 'main' && !hasMainResults && hasSprintResults
-                  ? 'Balapan utama (Grand Prix) belum dimulai atau belum tuntas. Silakan lihat tab Sprint Race untuk hasil sesi yang sudah selesai.'
+                  ? 'Balapan utama (Grand Prix) belum tuntas. Silakan lihat tab Sprint Race untuk sesi yang telah rampung.'
                   : 'Hasil balapan resmi akan ditampilkan segera setelah sesi diverifikasi oleh race control.'}
               </p>
             </div>
           ) : (
-            <div className="bg-slate-950/70 border border-slate-800/90 rounded-2xl overflow-hidden shadow-inner">
-              <div className="px-4 py-3 bg-slate-900/60 border-b border-slate-800 flex items-center justify-between">
-                <span className="text-xs font-mono font-bold text-slate-300 uppercase tracking-wider flex items-center gap-2">
+            <div className="bg-[#0a0c10] border border-[#232838] rounded overflow-hidden">
+              <div className="px-4 py-2.5 bg-[#0f121a] border-b border-[#232838] flex items-center justify-between font-mono text-xs">
+                <span className="font-bold text-slate-300 uppercase tracking-wider flex items-center gap-2">
                   <Award className="w-4 h-4 text-amber-400" />
-                  Urutan Klasifikasi Akhir ({activeResults.length} Pembalap)
+                  OFFICIAL RACE CLASSIFICATION ({activeResults.length} DRIVERS)
                 </span>
-                <span className="text-[11px] font-mono font-bold text-emerald-400 bg-emerald-500/10 px-2 py-0.5 rounded border border-emerald-500/20">
-                  FINAL
+                <span className="text-[10px] font-black text-emerald-400 bg-emerald-950/60 px-2 py-0.5 rounded border border-emerald-500/30">
+                  FINAL RESULT
                 </span>
               </div>
 
               <div className="overflow-x-auto">
                 <table className="w-full text-left text-sm">
-                  <thead className="bg-slate-950 text-[11px] uppercase font-mono tracking-wider text-slate-400 border-b border-slate-800">
+                  <thead className="bg-[#0c0e14] text-[11px] uppercase font-racing tracking-wider text-slate-400 border-b border-[#232838]">
                     <tr>
-                      <th className="py-2.5 px-2 sm:px-4 w-10 sm:w-14 text-center">Pos</th>
-                      <th className="py-2.5 px-2.5 sm:px-4">Pembalap</th>
-                      <th className="py-2.5 px-2 sm:px-4 text-center">Waktu</th>
-                      <th className="py-2.5 px-2.5 sm:px-4 text-right">Poin</th>
+                      <th className="py-2 px-3 w-12 text-center">POS</th>
+                      <th className="py-2 px-3">PEMBALAP & TIM</th>
+                      <th className="py-2 px-3 text-center">WAKTU / SELISIH</th>
+                      <th className="py-2 px-4 text-right">POIN</th>
                     </tr>
                   </thead>
-                  <tbody className="divide-y divide-slate-800/50 font-medium">
-                    {activeResults.map((entry, idx) => {
-                      const isPodium = entry.position <= 3;
-                      const isWinner = entry.position === 1;
+                  <tbody className="divide-y divide-[#181c28] font-medium">
+                    {activeResults.map((entry) => {
+                      const pos = entry.position;
+                      const isP1 = pos === 1;
+                      const isP2 = pos === 2;
+                      const isP3 = pos === 3;
 
                       return (
                         <tr
                           key={`${entry.position}-${entry.driverName}`}
-                          className={`hover:bg-slate-800/40 transition-colors ${
-                            isWinner
-                              ? 'bg-amber-500/5'
-                              : isPodium
-                              ? 'bg-slate-900/50'
-                              : ''
-                          }`}
+                          className="hover:bg-[#131620] transition-colors"
                         >
-                          {/* Position */}
-                          <td className="py-2.5 px-2 sm:px-4 text-center font-mono font-black">
-                            {isWinner ? (
-                              <span className="inline-flex items-center justify-center w-6 h-6 rounded-full bg-amber-500/20 text-amber-300 border border-amber-500/40 text-[11px] sm:text-xs shadow-sm">
-                                1
+                          {/* Position Badge */}
+                          <td className="py-2.5 px-3 text-center font-mono">
+                            {isP1 ? (
+                              <span className="inline-block bg-amber-400 text-black font-racing font-black text-xs px-2 py-0.5 rounded shadow-xs">
+                                P1
                               </span>
-                            ) : entry.position === 2 ? (
-                              <span className="inline-flex items-center justify-center w-6 h-6 rounded-full bg-slate-300/20 text-slate-200 border border-slate-400/40 text-[11px] sm:text-xs">
-                                2
+                            ) : isP2 ? (
+                              <span className="inline-block bg-slate-200 text-black font-racing font-black text-xs px-2 py-0.5 rounded shadow-xs">
+                                P2
                               </span>
-                            ) : entry.position === 3 ? (
-                              <span className="inline-flex items-center justify-center w-6 h-6 rounded-full bg-amber-700/20 text-amber-400 border border-amber-600/40 text-[11px] sm:text-xs">
-                                3
+                            ) : isP3 ? (
+                              <span className="inline-block bg-amber-700 text-white font-racing font-black text-xs px-2 py-0.5 rounded shadow-xs">
+                                P3
                               </span>
                             ) : (
-                              <span className="text-slate-400 font-bold text-xs sm:text-sm">
-                                {entry.position}
+                              <span className="text-slate-400 font-bold font-mono text-xs">
+                                {pos}
                               </span>
                             )}
                           </td>
 
-                          {/* Driver Info: Flag, Name, Team & Number (Google format) */}
-                          <td className="py-2.5 px-2.5 sm:px-4">
-                            <div className="flex items-center gap-2 sm:gap-3">
+                          {/* Driver Info: Flag, Name, Team & Number */}
+                          <td className="py-2.5 px-3">
+                            <div className="flex items-center gap-2 sm:gap-2.5">
                               <CountryFlag
                                 country={entry.countryCode || entry.nationality || 'gb'}
-                                className="w-4 h-3 sm:w-5 sm:h-3.5 rounded-xs shrink-0 shadow-xs"
+                                className="w-3.5 h-2.5 sm:w-4 sm:h-3 rounded-xs shrink-0 shadow-xs"
                               />
                               <div className="min-w-0">
                                 <div className="flex items-center gap-1.5 sm:gap-2">
-                                  <span className="font-bold text-white text-xs sm:text-sm truncate max-w-[125px] sm:max-w-none">
+                                  <span className="font-racing font-black text-base text-white uppercase tracking-tight truncate max-w-[150px] sm:max-w-none">
                                     {entry.driverName}
                                   </span>
                                   {entry.fastestLap && (
                                     <span
-                                      className="inline-flex items-center text-[9px] sm:text-[10px] font-bold text-purple-400 bg-purple-500/10 px-1 sm:px-1.5 py-0.2 rounded border border-purple-500/30 shrink-0"
+                                      className="inline-flex items-center text-[9px] font-mono font-bold text-purple-400 bg-purple-950/60 px-1 py-0.2 rounded border border-purple-500/30 shrink-0"
                                       title="Fastest Lap"
                                     >
                                       ⚡ FL
                                     </span>
                                   )}
                                 </div>
-                                <div className="text-[11px] text-slate-400 flex items-center gap-1.5 mt-0.5 truncate max-w-[145px] sm:max-w-none">
+                                <div className="text-[11px] text-slate-400 flex items-center gap-1.5 truncate max-w-[160px] sm:max-w-none font-tech">
                                   <span className="truncate">{entry.team}</span>
                                   {entry.driverNumber && (
                                     <>
@@ -231,13 +230,13 @@ export const RaceResultModal: React.FC<RaceResultModalProps> = ({ race, onClose 
                           </td>
 
                           {/* Waktu (Time / Gap) */}
-                          <td className="py-2.5 px-2 sm:px-4 text-center font-mono text-[11px] sm:text-sm">
-                            {isWinner ? (
-                              <span className="font-bold text-amber-400 bg-amber-500/10 px-1.5 sm:px-2 py-0.5 rounded border border-amber-500/20">
+                          <td className="py-2.5 px-3 text-center font-mono text-xs">
+                            {isP1 ? (
+                              <span className="font-bold text-amber-400 bg-amber-950/40 px-2 py-0.5 rounded border border-amber-500/20">
                                 {entry.timeOrGap}
                               </span>
                             ) : entry.timeOrGap.includes('DNF') || entry.timeOrGap.includes('Ret') ? (
-                              <span className="text-rose-400 font-semibold text-[10px] sm:text-xs">
+                              <span className="text-rose-400 font-semibold">
                                 {entry.timeOrGap}
                               </span>
                             ) : (
@@ -247,14 +246,14 @@ export const RaceResultModal: React.FC<RaceResultModalProps> = ({ race, onClose 
                             )}
                           </td>
 
-                          {/* Poin (Points Awarded) */}
-                          <td className="py-2.5 px-2.5 sm:px-4 text-right font-mono font-bold text-xs sm:text-sm">
+                          {/* Poin */}
+                          <td className="py-2.5 px-4 text-right">
                             {entry.points > 0 ? (
-                              <span className="text-amber-400">
-                                {entry.points}
+                              <span className="font-racing font-black text-lg text-white">
+                                {entry.points} <span className="text-[10px] font-mono text-slate-500 font-normal">PTS</span>
                               </span>
                             ) : (
-                              <span className="text-slate-600 font-normal">
+                              <span className="font-mono text-xs text-slate-600">
                                 0
                               </span>
                             )}
@@ -270,16 +269,16 @@ export const RaceResultModal: React.FC<RaceResultModalProps> = ({ race, onClose 
         </div>
 
         {/* Modal Footer */}
-        <div className="bg-slate-950 p-4 border-t border-slate-800 flex items-center justify-between text-xs text-slate-400">
-          <span className="flex items-center gap-1.5">
+        <div className="bg-[#090b10] p-3.5 border-t border-[#1f2434] flex items-center justify-between text-xs text-slate-400 font-mono">
+          <span className="flex items-center gap-1.5 text-[11px]">
             <Timer className="w-3.5 h-3.5 text-slate-500" />
-            Waktu disesuaikan dengan pencatatan resmi race timing official.
+            Waktu terverifikasi pencatatan resmi timing official.
           </span>
           <button
             onClick={onClose}
-            className="px-4 py-1.5 bg-slate-800 hover:bg-slate-700 text-white font-bold rounded-xl transition-all"
+            className="px-4 py-1 bg-[#1a1e2a] hover:bg-[#252b3c] text-white font-racing font-bold text-xs uppercase tracking-wider rounded border border-[#272d3f] transition-all"
           >
-            Tutup
+            TUTUP
           </button>
         </div>
       </div>

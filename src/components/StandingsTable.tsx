@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Trophy, Award } from 'lucide-react';
+import { Trophy, Award, Shield, Flag } from 'lucide-react';
 import { Driver, Team, SeriesType } from '../types/motorsport';
 import { CountryFlag } from './CountryFlag';
 import { DriverAvatar } from './DriverAvatar';
@@ -47,67 +47,71 @@ export const StandingsTable: React.FC<StandingsTableProps> = ({
       ? currentDrivers[0]?.points || 1
       : currentTeams[0]?.points || 1;
 
+  const isF1 = activeSeries === 'f1';
+
   return (
-    <div className="space-y-6">
-      {/* Header controls */}
-      <div className="flex flex-col md:flex-row items-start md:items-center justify-between gap-4 bg-slate-900/60 p-4 rounded-2xl border border-slate-800">
+    <div className="space-y-5 font-tech">
+      {/* Official Classification Header Controls */}
+      <div className="paddock-panel p-4 rounded flex flex-col md:flex-row items-start md:items-center justify-between gap-4 border border-[#232838]">
         <div>
-          <h2 className="text-xl font-black text-white flex items-center gap-2">
-            <Trophy className="w-5 h-5 text-amber-400" />
-            Klasemen Kejuaraan Dunia Resmi (Musim {season})
+          <div className="flex items-center gap-2">
+            <span className={`px-2 py-0.5 text-[10px] font-mono font-black uppercase text-white rounded ${isF1 ? 'bg-[#e10600]' : 'bg-[#0070c0]'}`}>
+              {isF1 ? 'FIA FORMULA 1' : 'FIM MOTOGP'}
+            </span>
+            <span className="text-xs font-mono text-slate-400">OFFICIAL WORLD CHAMPIONSHIP {season}</span>
+          </div>
+          <h2 className="text-2xl sm:text-3xl font-racing font-black text-white uppercase tracking-tight mt-1">
+            KLASEMEN KEJUARAAN DUNIA RESMI
           </h2>
-          <p className="text-xs text-slate-400 mt-0.5">
-            Data poin dan statistik resmi tanpa manipulasi bersumber dari FIA Formula 1 & FIM MotoGP.
-          </p>
         </div>
 
-        <div className="flex flex-wrap items-center gap-3">
+        <div className="flex flex-wrap items-center gap-2.5">
           {selectedSeries === 'all' && (
-            <div className="flex items-center bg-slate-950 p-1 rounded-xl border border-slate-800 text-xs font-bold">
+            <div className="flex items-center bg-[#0a0c10] p-0.5 rounded border border-[#232838] font-racing text-xs font-bold">
               <button
                 onClick={() => setActiveSeries('f1')}
-                className={`px-3 py-1.5 rounded-lg transition-all ${
+                className={`px-3 py-1 rounded transition-all uppercase ${
                   activeSeries === 'f1'
-                    ? 'bg-red-600 text-white shadow-sm'
+                    ? 'bg-[#e10600] text-white shadow-xs'
                     : 'text-slate-400 hover:text-white'
                 }`}
               >
-                Formula 1
+                FORMULA 1
               </button>
               <button
                 onClick={() => setActiveSeries('motogp')}
-                className={`px-3 py-1.5 rounded-lg transition-all ${
+                className={`px-3 py-1 rounded transition-all uppercase ${
                   activeSeries === 'motogp'
-                    ? 'bg-orange-600 text-white shadow-sm'
+                    ? 'bg-[#0070c0] text-white shadow-xs'
                     : 'text-slate-400 hover:text-white'
                 }`}
               >
-                MotoGP
+                MOTOGP
               </button>
             </div>
           )}
 
           {/* Standings Category Toggle */}
-          <div className="flex items-center bg-slate-950 p-1 rounded-xl border border-slate-800 text-xs font-bold">
+          <div className="flex items-center bg-[#0a0c10] p-0.5 rounded border border-[#232838] font-racing text-xs font-bold">
             <button
               onClick={() => setStandingsType('drivers')}
-              className={`px-3 py-1.5 rounded-lg transition-all ${
+              className={`px-3 py-1 rounded transition-all uppercase ${
                 standingsType === 'drivers'
-                  ? 'bg-slate-800 text-white shadow-sm'
+                  ? 'bg-[#232838] text-white shadow-xs'
                   : 'text-slate-400 hover:text-white'
               }`}
             >
-              Pembalap ({currentDrivers.length})
+              PEMBALAP ({currentDrivers.length})
             </button>
             <button
               onClick={() => setStandingsType('constructors')}
-              className={`px-3 py-1.5 rounded-lg transition-all ${
+              className={`px-3 py-1 rounded transition-all uppercase ${
                 standingsType === 'constructors'
-                  ? 'bg-slate-800 text-white shadow-sm'
+                  ? 'bg-[#232838] text-white shadow-xs'
                   : 'text-slate-400 hover:text-white'
               }`}
             >
-              Konstruktor / Tim
+              KONSTRUKTOR ({currentTeams.length})
             </button>
           </div>
         </div>
@@ -115,64 +119,82 @@ export const StandingsTable: React.FC<StandingsTableProps> = ({
 
       {/* DRIVERS STANDINGS TABLE */}
       {standingsType === 'drivers' && (
-        <div className="bg-slate-900/70 border border-slate-800 rounded-2xl overflow-hidden shadow-xl">
+        <div className="paddock-panel rounded overflow-hidden border border-[#232838]">
           <div className="overflow-x-auto">
             <table className="w-full text-left text-sm">
-              <thead className="bg-slate-950/80 text-xs uppercase font-mono tracking-wider text-slate-400 border-b border-slate-800">
+              <thead className="bg-[#0a0c10] font-racing text-xs uppercase tracking-wider text-slate-400 border-b border-[#232838]">
                 <tr>
-                  <th className="py-3 px-2 sm:px-4 w-10 sm:w-14 text-center">Pos</th>
-                  <th className="py-3 px-2.5 sm:px-4">Pembalap</th>
-                  <th className="py-3 px-3 sm:px-4 hidden sm:table-cell">Tim</th>
-                  <th className="py-3 px-2 sm:px-3 text-center hidden md:table-cell">Selisih</th>
-                  <th className="py-3 px-2 sm:px-3 text-center hidden sm:table-cell">Menang</th>
-                  <th className="py-3 px-2 sm:px-3 text-center hidden lg:table-cell">Podium</th>
+                  <th className="py-2.5 px-3 w-14 text-center">POS</th>
+                  <th className="py-2.5 px-3">PEMBALAP</th>
+                  <th className="py-2.5 px-3 hidden sm:table-cell">TIM & KONSTRUKTOR</th>
+                  <th className="py-2.5 px-3 text-center hidden md:table-cell">GAP</th>
+                  <th className="py-2.5 px-3 text-center hidden sm:table-cell">MENANG</th>
+                  <th className="py-2.5 px-3 text-center hidden lg:table-cell">PODIUM</th>
                   {activeSeries === 'motogp' && (
-                    <th className="py-3 px-2 sm:px-3 text-center hidden xl:table-cell">3 Terakhir</th>
+                    <th className="py-2.5 px-3 text-center hidden xl:table-cell">FORM TERAKHIR</th>
                   )}
-                  <th className="py-3 px-2.5 sm:px-4 text-right">Poin</th>
+                  <th className="py-2.5 px-4 text-right">POIN</th>
                 </tr>
               </thead>
-              <tbody className="divide-y divide-slate-800/60 font-medium">
+              <tbody className="divide-y divide-[#191d29] font-medium">
                 {currentDrivers.map((driver, index) => {
-                  const isLeader = index === 0;
+                  const pos = index + 1;
+                  const isP1 = pos === 1;
+                  const isP2 = pos === 2;
+                  const isP3 = pos === 3;
 
                   return (
                     <tr
                       key={driver.id}
                       onClick={() => onSelectDriver(driver)}
-                      className={`hover:bg-slate-800/50 cursor-pointer transition-colors ${
-                        isLeader ? 'bg-amber-500/5' : ''
-                      }`}
+                      className="hover:bg-[#151822] cursor-pointer transition-colors group"
                     >
-                      {/* Position */}
-                      <td className="py-3 px-2 sm:px-4 text-center font-mono font-black">
-                        {isLeader ? (
-                          <span className="inline-flex items-center justify-center w-6 h-6 sm:w-7 sm:h-7 rounded-full bg-amber-500/20 text-amber-300 border border-amber-500/40 text-[11px] sm:text-xs shadow-sm">
-                            🏆 1
+                      {/* Position Badge */}
+                      <td className="py-3 px-3 text-center font-mono">
+                        {isP1 ? (
+                          <span className="inline-block bg-amber-400 text-black font-racing font-black text-sm px-2 py-0.5 rounded shadow-xs">
+                            P1
+                          </span>
+                        ) : isP2 ? (
+                          <span className="inline-block bg-slate-200 text-black font-racing font-black text-sm px-2 py-0.5 rounded shadow-xs">
+                            P2
+                          </span>
+                        ) : isP3 ? (
+                          <span className="inline-block bg-amber-700 text-white font-racing font-black text-sm px-2 py-0.5 rounded shadow-xs">
+                            P3
                           </span>
                         ) : (
-                          <span className="text-slate-400 font-bold text-xs sm:text-sm">{index + 1}</span>
+                          <span className="text-slate-400 font-bold font-mono text-xs">
+                            {pos}
+                          </span>
                         )}
                       </td>
 
-                      {/* Driver info */}
-                      <td className="py-3 px-2.5 sm:px-4">
-                        <div className="flex items-center gap-2 sm:gap-3">
-                          <DriverAvatar driver={driver} size="xs" className="shrink-0 shadow-sm sm:w-10 sm:h-10" />
+                      {/* Driver Info with Solid Team Livery Stripe */}
+                      <td className="py-3 px-3">
+                        <div className="flex items-center gap-2.5">
+                          {/* 4px Livery Bar */}
+                          <span
+                            className="w-1 h-9 rounded-full shrink-0"
+                            style={{ backgroundColor: driver.teamColor || '#e10600' }}
+                          />
+
+                          <DriverAvatar driver={driver} size="xs" className="shrink-0" />
+
                           <div className="min-w-0">
-                            <div className="flex items-center gap-1.5 sm:gap-2">
-                              <CountryFlag country={driver.countryCode || driver.nationality} className="w-3.5 h-2.5 sm:w-4 sm:h-2.5 rounded-xs shrink-0" />
-                              <span className="font-bold text-white hover:text-amber-300 transition-colors truncate text-xs sm:text-sm max-w-[125px] sm:max-w-none">
+                            <div className="flex items-center gap-1.5">
+                              <CountryFlag country={driver.countryCode || driver.nationality} className="w-3.5 h-2.5 rounded-xs shrink-0 shadow-xs" />
+                              <span className="font-racing font-black text-base text-white group-hover:text-amber-400 transition-colors uppercase tracking-tight truncate">
                                 {driver.name}
                               </span>
                               <span
-                                className="text-[11px] sm:text-xs font-mono font-bold shrink-0"
+                                className="font-mono text-xs font-black shrink-0"
                                 style={{ color: driver.teamColor || '#f59e0b' }}
                               >
                                 #{driver.number}
                               </span>
                             </div>
-                            <div className="text-[11px] text-slate-400 sm:hidden flex items-center gap-1.5 mt-0.5 truncate max-w-[145px]">
+                            <div className="text-[11px] text-slate-400 sm:hidden flex items-center gap-1.5 mt-0.5 truncate">
                               <span className="truncate">{driver.team}</span>
                               {driver.gap && driver.gap !== '-' && (
                                 <span className="text-slate-500 font-mono text-[10px] shrink-0">({driver.gap})</span>
@@ -183,21 +205,17 @@ export const StandingsTable: React.FC<StandingsTableProps> = ({
                       </td>
 
                       {/* Team */}
-                      <td className="py-3.5 px-3 sm:px-4 hidden sm:table-cell">
+                      <td className="py-3 px-3 hidden sm:table-cell">
                         <span className="text-xs text-slate-300 font-semibold flex items-center gap-2 truncate">
-                          <span
-                            className="w-2.5 h-2.5 rounded-full shrink-0"
-                            style={{ backgroundColor: driver.teamColor }}
-                          />
                           <span className="truncate">{driver.team}</span>
                         </span>
                       </td>
 
                       {/* Gap */}
-                      <td className="py-3.5 px-2 sm:px-3 text-center font-mono text-xs hidden md:table-cell">
-                        {isLeader || driver.gap === '-' || !driver.gap ? (
-                          <span className="text-emerald-400 font-bold bg-emerald-500/10 px-2 py-0.5 rounded border border-emerald-500/20">
-                            Leader
+                      <td className="py-3 px-3 text-center font-mono text-xs hidden md:table-cell">
+                        {isP1 || driver.gap === '-' || !driver.gap ? (
+                          <span className="text-emerald-400 font-bold bg-emerald-950/40 px-2 py-0.5 rounded border border-emerald-500/20">
+                            LEADER
                           </span>
                         ) : (
                           <span className="text-slate-400 font-semibold">
@@ -207,32 +225,35 @@ export const StandingsTable: React.FC<StandingsTableProps> = ({
                       </td>
 
                       {/* Wins */}
-                      <td className="py-3.5 px-2 sm:px-3 text-center font-mono text-xs hidden sm:table-cell">
-                        <span className="font-bold text-white">{driver.wins}</span>
+                      <td className="py-3 px-3 text-center font-mono text-xs hidden sm:table-cell">
+                        <span className="font-bold text-white text-sm">{driver.wins}</span>
                         {typeof driver.sprintWins === 'number' && driver.sprintWins > 0 ? (
-                          <span className="text-[10px] text-amber-400 block font-normal">
+                          <span className="text-[10px] text-amber-400 block">
                             +{driver.sprintWins} spr
                           </span>
                         ) : null}
                       </td>
 
                       {/* Podiums */}
-                      <td className="py-3.5 px-2 sm:px-3 text-center font-mono text-slate-300 text-xs hidden lg:table-cell">
-                        <span className="font-bold text-white">{driver.podiums}</span>
+                      <td className="py-3 px-3 text-center font-mono text-slate-300 text-xs hidden lg:table-cell">
+                        <span className="font-bold text-white text-sm">{driver.podiums}</span>
                       </td>
 
                       {/* Last 3 Positions (MotoGP specific) */}
                       {activeSeries === 'motogp' && (
-                        <td className="py-3.5 px-2 sm:px-3 text-center font-mono text-xs hidden xl:table-cell">
-                          <span className="text-slate-400 bg-slate-950 px-2 py-0.5 rounded border border-slate-800 text-[11px]">
+                        <td className="py-3 px-3 text-center font-mono text-xs hidden xl:table-cell">
+                          <span className="text-slate-400 bg-[#0a0c10] px-2 py-0.5 rounded border border-[#1f2432] text-[11px]">
                             {driver.last3Positions?.trim() ? driver.last3Positions : '- - -'}
                           </span>
                         </td>
                       )}
 
-                      {/* Points */}
-                      <td className="py-3.5 px-3 sm:px-4 text-right font-mono font-black text-amber-400 text-base">
-                        {driver.points} <span className="text-xs text-slate-500 font-normal">PTS</span>
+                      {/* Points Total */}
+                      <td className="py-3 px-4 text-right">
+                        <span className="font-racing font-black text-xl sm:text-2xl text-white tabular-nums">
+                          {driver.points}
+                        </span>
+                        <span className="text-[10px] font-mono text-slate-500 uppercase ml-1">PTS</span>
                       </td>
                     </tr>
                   );
@@ -245,74 +266,86 @@ export const StandingsTable: React.FC<StandingsTableProps> = ({
 
       {/* CONSTRUCTORS STANDINGS TABLE */}
       {standingsType === 'constructors' && (
-        <div className="bg-slate-900/70 border border-slate-800 rounded-2xl overflow-hidden shadow-xl">
+        <div className="paddock-panel rounded overflow-hidden border border-[#232838]">
           <div className="overflow-x-auto">
             <table className="w-full text-left text-sm">
-              <thead className="bg-slate-950/80 text-xs uppercase font-mono tracking-wider text-slate-400 border-b border-slate-800">
+              <thead className="bg-[#0a0c10] font-racing text-xs uppercase tracking-wider text-slate-400 border-b border-[#232838]">
                 <tr>
-                  <th className="py-3 px-2 sm:px-4 w-10 sm:w-14 text-center">Pos</th>
-                  <th className="py-3 px-2.5 sm:px-4">Konstruktor / Tim</th>
-                  <th className="py-3 px-3 sm:px-4 hidden sm:table-cell">Mesin / Motor</th>
-                  <th className="py-3 px-2 sm:px-3 text-center hidden md:table-cell">Selisih</th>
-                  <th className="py-3 px-4 w-40 hidden lg:table-cell">Rasio Poin</th>
-                  <th className="py-3 px-2.5 sm:px-4 text-right">Poin</th>
+                  <th className="py-2.5 px-3 w-14 text-center">POS</th>
+                  <th className="py-2.5 px-3">KONSTRUKTOR / TIM BALAP</th>
+                  <th className="py-2.5 px-3 hidden sm:table-cell">POWER UNIT / MOTOR</th>
+                  <th className="py-2.5 px-3 text-center hidden md:table-cell">GAP</th>
+                  <th className="py-2.5 px-4 w-44 hidden lg:table-cell">BAROMETR POIN</th>
+                  <th className="py-2.5 px-4 text-right">POIN TOTAL</th>
                 </tr>
               </thead>
-              <tbody className="divide-y divide-slate-800/60 font-medium">
+              <tbody className="divide-y divide-[#191d29] font-medium">
                 {currentTeams.map((team, index) => {
                   const percentage = Math.max(5, Math.round((team.points / leaderPoints) * 100));
-                  const isLeader = index === 0;
-                  const gap = isLeader ? 'Leader' : `-${(leaderPoints - team.points).toFixed(0)}`;
+                  const pos = index + 1;
+                  const isP1 = pos === 1;
+                  const isP2 = pos === 2;
+                  const isP3 = pos === 3;
+                  const gap = isP1 ? 'LEADER' : `-${(leaderPoints - team.points).toFixed(0)}`;
 
                   return (
                     <tr
                       key={team.id}
-                      className={`hover:bg-slate-800/50 transition-colors ${
-                        isLeader ? 'bg-amber-500/5' : ''
-                      }`}
+                      className="hover:bg-[#151822] transition-colors"
                     >
-                      <td className="py-3 px-2 sm:px-4 text-center font-mono font-black">
-                        {isLeader ? (
-                          <span className="inline-flex items-center justify-center w-6 h-6 sm:w-7 sm:h-7 rounded-full bg-amber-500/20 text-amber-300 border border-amber-500/40 text-[11px] sm:text-xs shadow-sm">
-                            🏆 1
+                      <td className="py-3 px-3 text-center font-mono">
+                        {isP1 ? (
+                          <span className="inline-block bg-amber-400 text-black font-racing font-black text-sm px-2 py-0.5 rounded shadow-xs">
+                            P1
+                          </span>
+                        ) : isP2 ? (
+                          <span className="inline-block bg-slate-200 text-black font-racing font-black text-sm px-2 py-0.5 rounded shadow-xs">
+                            P2
+                          </span>
+                        ) : isP3 ? (
+                          <span className="inline-block bg-amber-700 text-white font-racing font-black text-sm px-2 py-0.5 rounded shadow-xs">
+                            P3
                           </span>
                         ) : (
-                          <span className="text-slate-400 font-bold text-xs sm:text-sm">{index + 1}</span>
+                          <span className="text-slate-400 font-bold font-mono text-xs">{pos}</span>
                         )}
                       </td>
 
-                      <td className="py-3 px-2.5 sm:px-4">
-                        <div className="flex items-center gap-2 sm:gap-2.5">
+                      <td className="py-3 px-3">
+                        <div className="flex items-center gap-2.5">
                           <span
-                            className="w-3 h-3 sm:w-3.5 sm:h-3.5 rounded-md shrink-0 shadow-sm"
+                            className="w-1.5 h-9 rounded-full shrink-0"
                             style={{ backgroundColor: team.color }}
                           />
                           <div className="min-w-0">
-                            <span className="font-bold text-white text-xs sm:text-sm block truncate">{team.name}</span>
-                            <span className="text-[10px] text-slate-400 block sm:hidden truncate">{team.powerUnitOrBike}</span>
+                            <span className="font-racing font-black text-base text-white block uppercase tracking-tight truncate">
+                              {team.name}
+                            </span>
+                            <span className="text-[10px] text-slate-400 block sm:hidden truncate font-tech">
+                              {team.powerUnitOrBike}
+                            </span>
                           </div>
                         </div>
                       </td>
 
-                      <td className="py-3.5 px-3 sm:px-4 text-xs text-slate-300 hidden sm:table-cell">
+                      <td className="py-3 px-3 text-xs text-slate-300 hidden sm:table-cell font-mono">
                         {team.powerUnitOrBike}
                       </td>
 
-                      {/* Gap */}
-                      <td className="py-3.5 px-2 sm:px-3 text-center font-mono text-xs hidden md:table-cell">
-                        {isLeader ? (
-                          <span className="text-emerald-400 font-bold bg-emerald-500/10 px-2 py-0.5 rounded border border-emerald-500/20">
-                            Leader
+                      <td className="py-3 px-3 text-center font-mono text-xs hidden md:table-cell">
+                        {isP1 ? (
+                          <span className="text-emerald-400 font-bold bg-emerald-950/40 px-2 py-0.5 rounded border border-emerald-500/20">
+                            LEADER
                           </span>
                         ) : (
                           <span className="text-slate-400 font-semibold">{gap}</span>
                         )}
                       </td>
 
-                      <td className="py-3.5 px-4 hidden lg:table-cell">
-                        <div className="w-full bg-slate-950 rounded-full h-2 overflow-hidden border border-slate-800">
+                      <td className="py-3 px-4 hidden lg:table-cell">
+                        <div className="w-full bg-[#0a0c10] rounded h-2 overflow-hidden border border-[#232838]">
                           <div
-                            className="h-full rounded-full transition-all duration-500"
+                            className="h-full rounded transition-all duration-500"
                             style={{
                               width: `${percentage}%`,
                               backgroundColor: team.color
@@ -321,8 +354,11 @@ export const StandingsTable: React.FC<StandingsTableProps> = ({
                         </div>
                       </td>
 
-                      <td className="py-3 px-2.5 sm:px-4 text-right font-mono font-black text-amber-400 text-sm sm:text-base">
-                        {team.points} <span className="text-[10px] sm:text-xs text-slate-500 font-normal">PTS</span>
+                      <td className="py-3 px-4 text-right">
+                        <span className="font-racing font-black text-xl sm:text-2xl text-white tabular-nums">
+                          {team.points}
+                        </span>
+                        <span className="text-[10px] font-mono text-slate-500 uppercase ml-1">PTS</span>
                       </td>
                     </tr>
                   );
